@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "d2AE+iAeuDYWJWtpknIqIhD7J83eoien6aJy8Hh/0lY=",
+  "Source": "GSL.CommonRepo",
+  "BasePath": "_content/GSL.CommonRepo",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj",
+      "Version": 2,
+      "Source": "GSL.DataContext",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
