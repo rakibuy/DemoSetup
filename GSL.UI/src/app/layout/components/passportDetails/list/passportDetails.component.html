@@ -1,0 +1,153 @@
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+
+                    </div>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="passports"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Passport Details</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name">Company Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Branch <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Registration No <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Passport Number <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Place Of Issue <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Issue Date <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Expire Date <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Remarks<p-sortIcon field="name"></p-sortIcon></th>
+                       <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-passport>
+                    <tr>
+                        <td style="width:10%; min-width:12rem;">
+                            <span class="p-column-title">companyId</span>
+                            {{ passport.companyId }}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">branchId</span>
+                            {{passport.branchId}}
+
+                        </td>
+                        <td style="width:10%; min-width:12rem;">
+                            <span class="p-column-title">registrationId</span>
+                            {{ passport.registrationId }}
+                        </td>
+
+                        <td style="width:10%; min-width:14rem;">
+                            <span class="p-column-title">passportNumber</span>
+                            {{passport.passportNumber}}
+
+                        </td>
+                        <td style="width:10%; min-width:12rem;">
+                            <span class="p-column-title">placeOfIssue</span>
+                            {{ passport.placeOfIssue }}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">issueDate</span>
+                            {{ passport.issueDate }}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">expireDate</span>
+                            {{ passport.expireDate }}
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">remarks</span>
+                            {{ passport.remarks }}
+                        </td>
+
+                       
+
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editPassport(passport)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deletePassport(passport)"></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="passportDialog" [style]="{width: '650px'}" header="Passport Details" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+
+                <div class="col-12">
+                    
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="companyId">Company Name</label>
+                                <input pInputText id="companyId" type="text" name="companyId"   [(ngModel)]="passport.companyId" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.companyId}" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="branchId">Branch</label>
+                                <input pInputText id="branchId" type="text" name="branchId"   [(ngModel)]="passport.branchId" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.branchId}" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="registrationId">Registration No</label>
+                                <input pInputText id="registrationId" type="text" name="registrationId"   [(ngModel)]="passport.registrationId" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.registrationId}"/>
+                            </div>
+                            
+                            <div class="field col-12 md:col-6">
+                                <label htmlFor="issueDate">Issue Date</label>
+                                <p-calendar [showIcon]="true" inputId="icon" name="issueDate"   [(ngModel)]="passport.issueDate"  autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.issueDate}"></p-calendar>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label htmlFor="expireDate">Expire Date</label>
+                                <p-calendar [showIcon]="true" inputId="icon" name="expireDate"   [(ngModel)]="passport.expireDate"  autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.expireDate}"></p-calendar>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="placeOfIssue">Place Of Issue</label>
+                                <input pInputText id="placeOfIssue" type="text" name="placeOfIssue"   [(ngModel)]="passport.placeOfIssue" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.placeOfIssue}"/>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="passportNumber">Passport Number</label>
+                                <input pInputText id="passportNumber" type="text"name="passportNumber"   [(ngModel)]="passport.passportNumber" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.passportNumber}" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="remarks">Remarks</label>
+                                <input pInputText id="remarks" type="text"name="remarks"   [(ngModel)]="passport.remarks" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !passport.remarks}" />
+                            </div>
+                            
+                            
+                    </div> 
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdatePassport()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deletePassportDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="passport">Are you sure you want to delete <b>{{passport.passportNumber}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deletePassportDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>

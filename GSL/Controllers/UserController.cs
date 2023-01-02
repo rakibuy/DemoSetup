@@ -13,11 +13,11 @@ namespace GSL.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-       
+
         private IWebHostEnvironment _webHostEnvironment;
 
         public UserController(IUserService userService,
-            
+
             IWebHostEnvironment webHostEnvironment)
         {
             _userService = userService;
@@ -40,10 +40,10 @@ namespace GSL.Controllers
 
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                FullName = user.FullName,
+                UserName = user.UserName,
                 Role = user.Role,
                 Email = user.Email,
-                ContactNo = user.ContactNo,
+                Number = user.Number,
                 AddedBy = "test" //HttpContext.User.FindFirstValue("Id"),
 
             };

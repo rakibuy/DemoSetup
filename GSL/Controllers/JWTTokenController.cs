@@ -35,7 +35,7 @@ namespace UYSIMS.Controllers
             {
                 if (VerifyPasswordHash(request.Password, CurrentUser.PasswordHash, CurrentUser.PasswordSalt))
                 {
-                    
+
                     string token = CreateToken(CurrentUser);
 
                     var refreshToken = GenerateRefreshToken();
@@ -49,14 +49,14 @@ namespace UYSIMS.Controllers
                     return BadRequest("Wrong password.");
 
                 }
-               
+
             }
             else
             {
                 return BadRequest("User not found.");
 
             }
-            
+
         }
 
         [HttpPost("refresh-token")]
@@ -110,13 +110,13 @@ namespace UYSIMS.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
                 new Claim("Id", user.Id.ToString()),
                 new Claim("Role", user.Role.ToString()),
-                new Claim("FullName", user.FullName.ToString()),
-                new Claim("ImageUrl", user.Image.ToString()),
-                new Claim("Username", user.Username.ToString())
+                new Claim("UserName", user.UserName.ToString()),
+                new Claim("Email", user.Email.ToString()),
+                
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(

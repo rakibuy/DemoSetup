@@ -25,17 +25,9 @@ namespace GSL.Service.Implementation
 
         {
 
-            user.Id = GetMaxId();
-            user.Image = "uploads\\profile\\profile.png";
-            user.JobAssignStatus = false;
-            user.IsVerified = true;
-            user.UserLocked = false;
-            user.IsSysAdmin = false;
-            user.IsSysAdmin = false;
-            user.IsManagement = false;
-            user.PasswordFailCount = 0;
-            user.Active = true;
-            user.Archive = true;
+           
+            
+            
             user.AddedDate = DateTime.Now;
             user.AddedFromIp = System.Net.Dns.GetHostName();
             var result = await _userRepository.AddAsync(user);
@@ -72,15 +64,14 @@ namespace GSL.Service.Implementation
             if (result != null)
             {
 
-                result.FullName = user.FullName;
-                result.JobAssignStatus = user.JobAssignStatus;
-                result.Image = user.Image;
+                result.UserName = user.UserName;
+                result.Email = user.Email;
+                result.Number = user.Number;
                 result.PasswordHash = user.PasswordHash;
                 result.PasswordSalt = user.PasswordSalt;
 
-                result.Email = user.Email;
-                result.ContactNo = user.ContactNo;
-                result.Nid = user.Nid;
+                
+               
 
                 result.UpdatedBy = user.UpdatedBy;
                 result.UpdatedDate = DateTime.Now;

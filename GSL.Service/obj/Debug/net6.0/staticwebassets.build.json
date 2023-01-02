@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "jes+BXKIOY7rQVdPsel2l4ISblnGTCaPHhsaGrTxk3I=",
+  "Hash": "J1hzp0du9b3e4kB6xayNCENcKzo/SSPM+R4JB8fq6dE=",
   "Source": "GSL.Service",
   "BasePath": "_content/GSL.Service",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "E:\\Practis\\GSL\\GSL.CommonRepo\\GSL.CommonRepo.csproj",
+      "Identity": "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\GSL.CommonRepo.csproj",
       "Version": 2,
       "Source": "GSL.CommonRepo",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
@@ -18,7 +18,7 @@
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
     },
     {
-      "Identity": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj",
+      "Identity": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj",
       "Version": 2,
       "Source": "GSL.DataContext",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

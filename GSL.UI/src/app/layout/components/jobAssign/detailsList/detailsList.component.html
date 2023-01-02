@@ -1,0 +1,105 @@
+<div class="card">
+    <div class="grid">
+        <div class="col-12">
+            <div class="card px-0 py-0">
+                
+                <p-toast></p-toast>
+                <p-table #dt [value]="assignJobDetails"   [columns]="cols" responsiveLayout="scroll" [rows]="10" 
+                [globalFilterFields]="['userName','issueFromDate','issueToDate','extendedDate','remark','status']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="left">
+                        <div>
+                            <button pButton styleClass="p-button-sm" pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/job-assign/list']"></button>
+                           
+    
+                        </div>
+                    </ng-template>
+                    
+                    <ng-template  pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            
+                                <button pButton styleClass="p-button-sm" pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/job-assign/list']"></button>
+                                <!-- <button pButton pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/register/list/']"></button> -->
+                                <h5 class="m-0">Job Panel</h5>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="no"> No <p-sortIcon field="no"></p-sortIcon></th>
+                            <th pSortableColumn="userName">Student Name<p-sortIcon field="userName"></p-sortIcon></th>
+                            <th pSortableColumn="userName">Staf Name<p-sortIcon field="userName"></p-sortIcon></th>
+                            <th pSortableColumn="userName">Councilor Name<p-sortIcon field="userName"></p-sortIcon></th>
+                            <th pSortableColumn="extendedDate">Extended Date?<p-sortIcon field="remark"></p-sortIcon></th>
+                            <th pSortableColumn="remark">Counsilor Remarks<p-sortIcon field="issueDate"></p-sortIcon></th>
+                            <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
+                            
+                            <!-- <th pSortableColumn="ticketNo">Ticket No <p-sortIcon field="ticketNo"></p-sortIcon></th> -->
+                            <th >Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template class="p-0" pTemplate="body" let-assignJobDetail  let-rowIndex="rowIndex">
+                        <tr>
+                            <td  style="width:10%; min-width:6rem;">
+                                <span class="p-column-title">No</span>
+                                <i class="pi pi-fw pi-chevron-right"></i>
+                                 {{rowIndex + 1}}
+                                
+                                 
+                             </td>
+
+                             <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">userName</span>
+                                {{ assignJobDetail.userName  }}
+                            </td>
+                            
+                            <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">stafName</span>
+                                {{ assignJobDetail.stafName }}
+                            </td>
+
+                            <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">councilorName</span>
+                                {{ assignJobDetail.councilorName }}
+                            </td>
+
+                            <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">nextFollowupDate</span>
+                                {{ assignJobDetail.nextFollowupDate | date:'dd-MM-yyyy' }}
+                            </td>
+
+                            <td class="p-2" style="width:20%; min-width:10rem;">
+                                <span class="p-column-title">preferenceCountry</span>
+                                {{ assignJobDetail.preferenceCountry }}
+                            </td>
+
+                            <td class="p-2" style="width:20%; min-width:10rem;">
+                                <span class="p-column-title">status</span>
+                                {{ assignJobDetail.status }}
+                            </td>
+
+
+    
+                            <!-- <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">ticketNo</span>
+                                {{jobAssign.ticketNo}}
+    
+                            </td> -->
+
+                            <td>
+                                <div class="flex">
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" [routerLink]="['/student-portal/', assignJobDetail.userId]"></button>
+                                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteInformation(information)"></button> -->
+                                </div>
+                            </td>
+                        </tr>
+    
+                    </ng-template>
+                </p-table>
+            </div>
+  
+        </div>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="card">
+    <div class="grid">
+        <div class="col-12">
+            <div class="card px-0 py-0">
+                
+                <p-toast></p-toast>
+                <p-table #dt [value]="assignJobDetails"   [columns]="cols" responsiveLayout="scroll" [rows]="10" 
+                [globalFilterFields]="['id', 'userName','stafName','councilorName','preferenceCountry','councilorRemarks','status' ]"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                    
+                    
+                    <ng-template  pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            <div>
+                                <button pButton styleClass="p-button-sm" pRipple label="New" class="p-button-success mr-2 p-button-sm" (click)="addoreditPage()" ></button>
+                                <!-- <button pButton styleClass="p-button-sm" pRipple label="Assign Pending" class="p-button-success mr-2 p-button-sm" [routerLink]="['/job-assign/assign-pending']"></button>
+                                <button pButton styleClass="p-button-sm" pRipple label="Assign Done" class="p-button-success mr-2 p-button-sm" [routerLink]="['/job-assign/assign-done']"></button> -->
+                                <!-- <button pButton styleClass="p-button-sm" pRipple label="Assign Done" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/job-assign/assign-done']"></button>
+                                <button pButton pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/register/list/']"></button> -->
+                            </div>
+                                <h5 class="m-0">Job Panel</h5>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="id"> Id <p-sortIcon field="id"></p-sortIcon></th>
+                            <th pSortableColumn="userName">Student<p-sortIcon field="userName"></p-sortIcon></th>
+                            <th pSortableColumn="stafName">Staff<p-sortIcon field="stafName"></p-sortIcon></th>
+                            <th pSortableColumn="councilorName">Counsilor <p-sortIcon field="councilorName"></p-sortIcon></th>
+                            <!-- <th pSortableColumn="issueDate">Issue Date <p-sortIcon field="issueDate"></p-sortIcon></th> -->
+                            <th pSortableColumn="nextFollowupDate">Next Followup Date<p-sortIcon field="nextFollowupDate"></p-sortIcon></th>
+                            <th pSortableColumn="preferenceCountry">Preference Country <p-sortIcon field="preferenceCountry"></p-sortIcon></th>
+                            <th pSortableColumn="councilorRemarks">Counsilor Remarks <p-sortIcon field="councilorRemarks"></p-sortIcon></th>
+
+                            <th pSortableColumn="councilorRemarks">Agreement Count <p-sortIcon field="councilorRemarks"></p-sortIcon></th>
+                            <th pSortableColumn="councilorRemarks">Payable <p-sortIcon field="councilorRemarks"></p-sortIcon></th>
+                            <th pSortableColumn="councilorRemarks">Pay <p-sortIcon field="councilorRemarks"></p-sortIcon></th>
+                            <th pSortableColumn="councilorRemarks">Remainig<p-sortIcon field="councilorRemarks"></p-sortIcon></th>
+                            <th pSortableColumn="councilorRemarks">Remarks <p-sortIcon field="councilorRemarks"></p-sortIcon></th>
+                            <th pSortableColumn="agreementIssueStatus">Status <p-sortIcon field="agreementIssueStatus"></p-sortIcon></th>
+                            <!-- <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th> -->
+                            <!-- <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th> -->
+                            
+                            
+                            <th >Action</th>
+                        </tr>
+                    </ng-template>
+                    
+                    <ng-template class="p-0" pTemplate="body" let-assignJobDetail  let-rowIndex="rowIndex">
+                        <tr>
+                            <td  style="width:10%; min-width:6rem;">
+                                <span class="p-column-title">id</span>
+                                 {{assignJobDetail.id }}
+                                
+                                 
+                             </td>
+
+                             <td class="p-2" style="width:15%; min-width:8rem;">
+                                <span class="p-column-title">userName</span>
+                                {{ assignJobDetail.userName  }}
+                            </td>
+                            
+                            <td class="p-2" style="width:15%; min-width:8rem;">
+                                <span class="p-column-title">stafName</span>
+                                {{ assignJobDetail.stafName }}
+                            </td>
+
+                            <td class="p-2" style="width:15%; min-width:9rem;">
+                                <span class="p-column-title">councilorName</span>
+                                {{ assignJobDetail.councilorName }}
+                            </td>
+
+                            <!-- <td class="p-2" style="width:20%; min-width:10rem;">
+                                <span class="p-column-title">issueDate</span>
+                                {{ assignJobDetail.issueDate | date:'dd-MM-yyyy' }}
+                            </td> -->
+
+                            <td class="p-2" style="width:15%; min-width:6rem;">
+                                <span class="p-column-title">nextFollowupDate</span>
+                                {{ assignJobDetail.nextFollowupDate | date:'dd-MM-yyyy' }}
+                            </td>
+
+
+                            <td class="p-2" style="width:15%; min-width:8rem;">
+                                <span class="p-column-title">preferenceCountry</span>
+                                {{ assignJobDetail.preferenceCountry }}
+                            </td>
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">councilorRemarks</span>
+                                {{ assignJobDetail.councilorRemarks }}
+                            </td>
+                            
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">totalAgrementNumber</span>
+                                {{ assignJobDetail.totalAgrementNumber }}
+                            </td>
+
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">totalPayable</span>
+                                {{ assignJobDetail.totalPayable }}
+                            </td>
+
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">totalPay</span>
+                                {{ assignJobDetail.totalPay }}
+                            </td>
+
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">remainigPay</span>
+                                {{ assignJobDetail.remainigPay }}
+                            </td>
+
+
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">remarksFrompersonal</span>
+                                {{ assignJobDetail.remarksFrompersonal }}
+                            </td>
+
+
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <span class="p-column-title">status</span>
+                                {{ assignJobDetail.agreementIssueStatus }}
+                            </td>
+
+                            
+                            
+
+                            
+
+                            <!-- <td class="p-2" style="width:20%; min-width:10rem;">
+                                <span class="p-column-title">status</span>
+                                {{ assignJobDetail.status }}
+                            </td> -->
+
+
+    
+                            <!-- <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">ticketNo</span>
+                                {{jobAssign.ticketNo}}
+    
+                            </td> -->
+
+                            <td class="p-2" style="width:15%; min-width:10rem;">
+                                <div class="flex">
+                                    <button pButton pRipple icon="pi pi-pencil" [disabled]="assignJobDetail.agreementIssueStatus == 'Done'" class="p-button-rounded p-button-success mr-2" [routerLink]="['/job-assign/addoredit/', assignJobDetail.assignJobMasterId]"></button>
+                                    <button pButton pRipple label="Add" [disabled]="assignJobDetail.agreementIssueStatus == 'Done'" class="p-button-rounded p-button-success mr-2" (click)="AddUserDialog(assignJobDetail.id)" ></button>
+                                    <button pButton pRipple icon="pi pi-user" [disabled]="assignJobDetail.userId == 0" class="p-button-rounded p-button-success mr-2"  [routerLink]="['/student-portal/', assignJobDetail.userId]" ></button>
+                                   
+                                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteInformation(information)"></button> -->
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </ng-template>
+                   
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="addUserDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                <div class="flex align-items-center justify-content-center">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                    <span >Are you sure you want to Add Student <b>{{assignJobDetail.userName}}</b>?</span>
+                </div>
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="addUserDialog = false"></button>
+                    <button pButton pRipple icon="pi pi-check"  class="p-button-text" label="Yes" (click)="AddStudent()"></button>
+                </ng-template>
+            </p-dialog>
+  
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+
+                    </div>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="exams"   [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','session.name','duration', 'session.duration']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Exam</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="no">No <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="date"> Exam Date <p-sortIcon field="date"></p-sortIcon></th>
+                        <th pSortableColumn="examCode">Exam Code<p-sortIcon field="examCode"></p-sortIcon></th>
+                        <th pSortableColumn="startTime">Start Time<p-sortIcon field="startTime"></p-sortIcon></th>
+                        <th pSortableColumn="endTime">End Time <p-sortIcon field="endTime"></p-sortIcon></th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-exam  let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="width:25%; min-width:6rem;">
+                            <span class="p-column-title">No</span>
+                             {{rowIndex + 1}}
+                         </td>
+                       
+                        <td style="width:35%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{ exam.name }}
+                        </td>
+
+                        <td style="width:35%; min-width:10rem;">
+                            <span class="p-column-title">date</span>
+                            {{exam.date | date:'yyyy-mm-dd'}}
+
+                        </td>
+
+                        <td style="width:35%; min-width:10rem;">
+                            <span class="p-column-title">examCode</span>
+                            {{exam.examCode}}
+
+                        </td>
+                        <td style="width:35%; min-width:10rem;">
+                            <span class="p-column-title">startTime</span>
+                            {{exam.startTime}}
+
+                        </td>
+                        <td style="width:35%; min-width:10rem;">
+                            <span class="p-column-title">endTime</span>
+                            {{exam.endTime }}
+
+                        </td>
+
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editExam(exam)"></button>
+                                <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteExam(exam)"></button> -->
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="examDialog" [style]="{width: '650px'}" header="Exam Details" [modal]="true" class="p-fluid">
+            <ng-template  pTemplate="content">
+                <div class="col-12">   
+                    <div class="p-fluid p-formgrid grid">
+
+                        <div class="field col-12 md:col-6">
+                            <label for="name">Name</label>
+                            <input  type="text" pInputText id="name" name="name"   [(ngModel)]="exam.name"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !exam.name}"/>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !exam.name">Name is required.</small>
+                        </div>
+
+                        <div class="field col-12 md:col-6">
+                            <label for="date">Exam Date</label>
+                            <input   type="date" pInputText id="date" name="date"   [(ngModel)]="exam.date"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !exam.date}"/> 
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !exam.date">Date is required.</small>
+                        </div>
+
+                        <div class="field z-5 col-12 md:col-4">
+                            <label for="examCode">Exam Code</label>
+                            <input  type="text" pInputText id="examCode" name="examCode"   [(ngModel)]="exam.examCode"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !exam.examCode}"/>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !exam.examCode">Exam Code is required.</small>
+                        </div>
+
+                        <div class="field z-5 col-12 md:col-4">
+                            <label for="startTime">Start Time</label>
+                            <p-calendar  [timeOnly]="true" hourFormat="12" inputId="timeonly" [(ngModel)]="exam.startTime"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !exam.startTime}" ></p-calendar>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !exam.startTime">Start Time is required.</small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                           
+
+                            <label for="endTime">End Time</label>
+                            <p-calendar class="z-5"  [timeOnly]="true" hourFormat="12" inputId="timeonly" [(ngModel)]="exam.endTime"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !exam.endTime}"></p-calendar>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !exam.endTime">End Time is required.</small>
+                        </div>
+            
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateExam()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteExamDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="exam">Are you sure you want to delete <b>{{exam.name}}</b>?</span>
+            </div>
+            <ng-template class="z-0" pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deleteExamDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>

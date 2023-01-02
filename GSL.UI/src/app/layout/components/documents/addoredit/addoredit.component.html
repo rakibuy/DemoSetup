@@ -1,0 +1,107 @@
+<div class="card" [formGroup]="productform">
+    <p-toast></p-toast>
+    <h5>Apply Panel</h5>
+    
+        
+            <div class="card">
+                <h5>Master</h5>
+                <div class="col-12">
+                    <div class="p-fluid p-formgrid grid">
+                        
+                       
+                        <div class="field col-4">
+                            <label htmlFor="patientId">Patien <span class="text-danger">*</span></label>
+                            <input type="text" pInputText  formControlName="patientId"  [(ngModel)]="document.patientId">
+                        </div>
+                        <div class="field col-4">
+                            <label htmlFor="clientId">Client<span class="text-danger">*</span></label>
+                            <input type="text" pInputText  formControlName="clientId"  [(ngModel)]="document.clientId">
+                        </div>
+                        <div class="field col-4">
+                            <label htmlFor="issueDate">Issue Date <span class="text-danger">*</span></label>
+                            <input type="date" pInputText  formControlName="issueDate"  [(ngModel)]="document.issueDate">
+                        </div>
+
+                            <h5> Details </h5>
+                            <div class="col-12">
+                                    <ng-container >
+                                        <div class="grid formgrid">
+                                                <!-- <div class="field col-3">
+                                                    <label class="ml-2">Document No</label>
+                                                </div> -->
+                                                <div class="field col-4">
+                                                    <label class="ml-3">Document Title</label>
+                                                </div>
+                                               
+                                                <!-- <div class="field col-3">
+                                                    <label class="ml-2">Document Type</label>
+                                                </div> -->
+
+                                                <div class="field col-6">
+                                                    <label class="ml-2">Document</label>
+                                                </div>
+                                                
+                                        </div>
+                                    </ng-container>
+
+                                    <div class="field col-12 md:col-1">
+                                                
+                                        <button   (click)="addDetailsItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                        
+                                    </div>
+                                
+                                <ng-container formGroupName="documentDetails">
+                                    <ng-container *ngFor="let itemGroup of documentDetails.controls; let i = index; let lst= last; let fst=first;" [formGroupName]="i">
+                                       
+                                        <div class="grid formgrid" >
+                                            <app-upload  (onUploadFinished)="uploadFinished($event)"></app-upload>
+                                            
+                                            <input type="hidden"  formControlName="id">
+
+                                            <input type="hidden"  formControlName="documentMasterId">
+                                            <!-- <input type="hidden"  formControlName="documentNo">
+                                            <input type="hidden"  formControlName="documentType">
+                                            <input type="hidden"  formControlName="documentSize">
+                                            <input type="hidden"  formControlName="url"> -->
+                                            
+                                            <div class="field col-3">
+                                                <input pInputText type="text"  formControlName="documentTitle" >
+                                            </div>
+
+
+                                            <div class="field col-3" >
+                                                <input pInputText type="text"  formControlName="documentType" >
+                                            </div>
+
+                                            <div class="field col-3" >
+                                                <input pInputText type="hidden" value="{{this.response.dbPath}}"  formControlName="url" >
+                                            </div>
+                                            
+                                            <div class="field col-3" >
+                                                <!-- <input pInputText type="file" > -->
+                                                <!-- <select hidden formControlName="url">
+                                                    <option selected value="{{this.response.dbPath}}"></option>
+                                                </select> -->
+                                                  
+                                                <button  (click)="removeAtDetails(i)" type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                                                <!-- <app-upload  (onUploadFinished)="uploadFinished($event)"></app-upload> -->
+                                                <!-- <img src="https://localhost:7103/{{this.response.dbPath}}" formControlName="url" alt="profile picture" style="width:60px; height:60px;"> -->
+                                            </div>
+                                            
+                
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                              
+                            </div>
+                        
+                      
+                    </div>
+                
+                </div>
+                <div class="content-section implementation mt-5" >
+                    <button pButton label="Submit" icon="pi pi-check" iconPos="right" class="mx-1 p-button-sm" (click)="addOrUpdateDetails()"></button>
+                    <button pButton label="Cancel" icon="pi pi-check" iconPos="right" class="mx-1 p-button-sm" [routerLink]="['/apply/list']"></button>
+               </div>
+            </div>
+</div>

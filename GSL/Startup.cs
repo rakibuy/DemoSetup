@@ -79,6 +79,7 @@ namespace GSL
 
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILeadsService, LeadsService>();
 
 
             services.AddControllersWithViews();

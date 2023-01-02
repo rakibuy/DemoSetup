@@ -1,0 +1,395 @@
+
+<div class="grid">
+    <div class="col-12"  [formGroup]="form">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+
+                    </div>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="informations"   [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['firstName','information.firstName','lastName','information.lastName','middleName', 'information.middleName','nickname','information.nickname']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Personal Information</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header" >
+                    <tr>
+                       
+                        <th pSortableColumn="firstName">No<p-sortIcon field="firstName"></p-sortIcon></th>
+                        <th pSortableColumn="firstName">First Name<p-sortIcon field="firstName"></p-sortIcon></th>
+                        <th pSortableColumn="middleName">Middle Name<p-sortIcon field="middleName"></p-sortIcon></th>
+                        <th pSortableColumn="lastName">Last Name<p-sortIcon field="lastName"></p-sortIcon></th>
+                        <th pSortableColumn="nickname">Nick Name<p-sortIcon field="nickname"></p-sortIcon></th>
+                        <th pSortableColumn="fatherName">Father's Name<p-sortIcon field="fatherName"></p-sortIcon></th>
+                        <th pSortableColumn="motherName">Mother's Name<p-sortIcon field="motherName"></p-sortIcon></th>
+                        <th pSortableColumn="birthDate">Birth Date<p-sortIcon field="birthDate"></p-sortIcon></th>
+                        <th pSortableColumn="birthPlace">Birth Place<p-sortIcon field="birthPlace"></p-sortIcon></th>
+                        <th pSortableColumn="spouseName">Spouse Name<p-sortIcon field="spouseName"></p-sortIcon></th>
+                        <th pSortableColumn="son">Son<p-sortIcon field="son"></p-sortIcon></th>
+                        <th pSortableColumn="daughter">Daughter<p-sortIcon field="daughter"></p-sortIcon></th>
+                        <th pSortableColumn="tin">Tin<p-sortIcon field="tin"></p-sortIcon></th>
+                        <th pSortableColumn="passportNo">Passport No<p-sortIcon field="passportNo"></p-sortIcon></th>
+                        <th pSortableColumn="drivingLicense">Driving License<p-sortIcon field="drivingLicense"></p-sortIcon></th>
+                        <th pSortableColumn="nid">Nid<p-sortIcon field="nid"></p-sortIcon></th>
+                        <th pSortableColumn="extraCurricularActivities">extraCurricularActivities<p-sortIcon field="extraCurricularActivities"></p-sortIcon></th>
+                        <th pSortableColumn="remark">Remark<p-sortIcon field="remark"></p-sortIcon></th>
+                        <th pSortableColumn="genderId">Gender<p-sortIcon field="genderId"></p-sortIcon></th>
+                        <th pSortableColumn="nationalityId">Nationality<p-sortIcon field="nationalityId"></p-sortIcon></th>
+                        <th pSortableColumn="religionId">Religion<p-sortIcon field="religionId"></p-sortIcon></th>
+                        <th pSortableColumn="bloodGroupId">Blood Group<p-sortIcon field="bloodGroupId"></p-sortIcon></th>
+                        <th pSortableColumn="maritalStatusId">Marital Status<p-sortIcon field="maritalStatusId"></p-sortIcon></th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-information let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="width:5%; min-width:6rem;">
+                            <span class="p-column-title">First Name</span>
+                            {{rowIndex + 1}}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">First Name</span>
+                            {{ information.firstName }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">Middle Name</span>
+                            {{ information.middleName }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">Last Name</span>
+                            {{ information.lastName }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">Nick Name</span>
+                            {{ information.nickname }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">FatherName</span>
+                            {{ information.fatherName }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">motherName</span>
+                            {{ information.motherName }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">birthDate</span>
+                            {{ information.birthDate | date:'yyyy-MM-dd' }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">birthPlace</span>
+                            {{ information.birthPlace  }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">spouseName</span>
+                            {{ information.spouseName }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">son</span>
+                            {{ information.son }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">daughter</span>
+                            {{ information.daughter }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">tin</span>
+                            {{ information.tin }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">passportNo</span>
+                            {{ information.passportNo }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">drivingLicense</span>
+                            {{ information.drivingLicense }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">nid</span>
+                            {{ information.nid }}
+                        </td>
+                        <td style="width:5%; min-width:20rem;">
+                            <span class="p-column-title">extraCurricularActivities</span>
+                            {{ information.extraCurricularActivities }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">remark</span>
+                            {{ information.remark }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">genderId</span>
+                            {{ information.genderId }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">nationalityId</span>
+                            {{ information.nationalityId }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">religionId</span>
+                            {{ information.religionId }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">bloodGroupId</span>
+                            {{ information.bloodGroupId }}
+                        </td>
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">maritalStatusId</span>
+                            {{ information.maritalStatusId }}
+                        </td>
+                       
+
+                        
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editInformation(information)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteInformation(information)"></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog  [(visible)]="informationDialog" [style]="{width: '850px'}" header="Personal Information Details" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+
+                <div class="col-12">
+                   
+                        
+                    <div class="p-fluid p-formgrid grid" >
+                        <div class="field col-4">
+                            <label htmlFor="firstName">First Name</label>
+                            <input formControlName="firstName" id="firstName" type="text" name="firstName"   [(ngModel)]="information.firstName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.firstName}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched)" >
+                                <div *ngIf="f['firstName'].errors && f['firstName'].errors['required']">First Name is required.</div>
+                                
+                              </small>
+                        </div>
+                        
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="middleName">Middle Name</label>
+                            <input formControlName="middleName" id="middleName" type="text" name="middleName"   [(ngModel)]="information.middleName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.middleName}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['fatherName'].invalid && (f['middleName'].dirty || f['middleName'].touched)" >
+                                <div *ngIf="f['middleName'].errors && f['middleName'].errors['required']">Middle Name is required.</div>
+                                
+                              </small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="lastName">Last Name</label>
+                            <input formControlName="lastName" id="lastname2" type="text" name="lastName"   [(ngModel)]="information.lastName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.lastName}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched)" >
+                                <div *ngIf="f['lastName'].errors && f['lastName'].errors['required']">Last Name is required.</div>
+                                
+                              </small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="nickname">Nick Name</label>
+                            <input formControlName="nickname" id="nickname" type="text" name="nickname"   [(ngModel)]="information.nickname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.nickname}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['nickname'].invalid && (f['nickname'].dirty || f['nickname'].touched)" >
+                                <div *ngIf="f['nickname'].errors && f['nickname'].errors['required']">Nick Name is required.</div>
+                                
+                              </small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="fatherName">Father's Name</label>
+                            <input formControlName="fatherName" id="fatherName" type="text" name="fatherName"   [(ngModel)]="information.fatherName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.fatherName}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['fatherName'].invalid && (f['fatherName'].dirty || f['fatherName'].touched)" >
+                                <div *ngIf="f['fatherName'].errors && f['fatherName'].errors['required']">Father's Name is required.</div>
+                                
+                              </small>
+                        </div>
+                        
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="motherName">Mother's Name</label>
+                            <input formControlName="motherName" id="motherName" type="text" name="motherName"   [(ngModel)]="information.motherName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.motherName}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['motherName'].invalid && (f['motherName'].dirty || f['motherName'].touched)" >
+                                <div *ngIf="f['motherName'].errors && f['motherName'].errors['required']">Mother Name is required.</div>
+                              </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="registrationId">Registration No</label>
+                            <input formControlName="registrationId" id="registrationId" type="text" name="registrationId"   [(ngModel)]="information.registrationId" required  [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.registrationId}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['registrationId'].invalid && (f['registrationId'].dirty || f['registrationId'].touched)" >
+                                <div *ngIf="f['registrationId'].errors && f['registrationId'].errors['required']">Registration Name is required.</div>
+                                
+                              </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="birthDate">Birth Date</label>
+                            <input formControlName="birthDate" type="date" id="birthDate" name="birthDate" [(ngModel)]="information.birthDate" [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.birthDate}" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['birthDate'].invalid && (f['birthDate'].dirty || f['birthDate'].touched)" >
+                                <div *ngIf="f['birthDate'].errors && f['birthDate'].errors['required']">Birth Date Name is required.</div>
+                                
+                              </small>
+                        </div>
+                        
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="birthPlace">Birth Place</label>
+                            <input formControlName="birthPlace"  id="birthPlace" type="text" name="birthPlace"   [(ngModel)]="information.birthPlace" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.birthPlace}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['birthPlace'].invalid && (f['birthPlace'].dirty || f['birthPlace'].touched)" >
+                                <div *ngIf="f['birthPlace'].errors && f['birthPlace'].errors['required']">Birth Place Name is required.</div>
+                                
+                              </small>
+                        </div>
+                        
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="spouseName">Spouse Name</label>
+                            <input formControlName="spouseName" id="spouseName" type="text" name="spouseName"   [(ngModel)]="information.spouseName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.spouseName}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['spouseName'].invalid && (f['spouseName'].dirty || f['spouseName'].touched)" >
+                                <div *ngIf="f['spouseName'].errors && f['spouseName'].errors['required']">Spouse Name is required.</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="son">Son</label>
+                            <input formControlName="son" id="son" type="text" name="son"   [(ngModel)]="information.son" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.son}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['son'].invalid && (f['son'].dirty || f['son'].touched)" >
+                                <div *ngIf="f['son'].errors && f['son'].errors['required']">Son Name is required.</div>
+                                <div *ngIf="f['son'].errors && f['son'].errors['pattern']">Invalid Son</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="daughter">Daughter</label>
+                            <input formControlName="daughter" id="daughter" rows="4" name="daughter"   [(ngModel)]="information.daughter" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.daughter}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['daughter'].invalid && (f['daughter'].dirty || f['daughter'].touched)" >
+                                <div *ngIf="f['daughter'].errors && f['daughter'].errors['required']">Daughter Name is required.</div>
+                                <div *ngIf="f['daughter'].errors && f['daughter'].errors['pattern']">Invalid Daughter</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="tin">TIN</label>
+                            <input formControlName="tin" id="tin" type="text" name="tin"   [(ngModel)]="information.tin" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.tin}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['tin'].invalid && (f['tin'].dirty || f['tin'].touched)" >
+                                <div *ngIf="f['tin'].errors && f['tin'].errors['required']">Tin  is required.</div>
+                            </small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="passportNo">Passport No</label>
+                            <input formControlName="passportNo" id="passportNo" type="text" name="passportNo"   [(ngModel)]="information.passportNo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.passportNo}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['passportNo'].invalid && (f['passportNo'].dirty || f['passportNo'].touched)" >
+                                <div *ngIf="f['passportNo'].errors && f['passportNo'].errors['required']">Passport  is required.</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="drivingLicense">Driving License</label>
+                            <input formControlName="drivingLicense" id="drivingLicense" type="text" name="drivingLicense"   [(ngModel)]="information.drivingLicense" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.drivingLicense}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['drivingLicense'].invalid && (f['drivingLicense'].dirty || f['drivingLicense'].touched)" >
+                                <div *ngIf="f['drivingLicense'].errors && f['drivingLicense'].errors['required']">Driving License  is required.</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="nid">NID</label>
+                            <input formControlName="nid" id="nid" type="text" name="nid"   [(ngModel)]="information.nid" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.nid}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['nid'].invalid && (f['nid'].dirty || f['nid'].touched)" >
+                                <div *ngIf="f['nid'].errors && f['nid'].errors['required']">Driving License  is required.</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="extraCurricularActivities">Extra Curricular Activities</label>
+                            <input formControlName="extraCurricularActivities" id="extraCurricularActivities" type="text" name="extraCurricularActivities"   [(ngModel)]="information.extraCurricularActivities" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.extraCurricularActivities}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['extraCurricularActivities'].invalid && (f['extraCurricularActivities'].dirty || f['extraCurricularActivities'].touched)" >
+                                <div *ngIf="f['extraCurricularActivities'].errors && f['extraCurricularActivities'].errors['required']">Extra Curricular Activities   is required.</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="remark">Remark</label>
+                            <input formControlName="remark" id="remark" type="text" name="remark"   [(ngModel)]="information.remark" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.remark}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['remark'].invalid && (f['remark'].dirty || f['remark'].touched)" >
+                                <div *ngIf="f['remark'].errors && f['remark'].errors['required']">Remark   is required.</div>
+                            </small>
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="nationalityId">Nationality</label>
+                            <input formControlName="nationalityId" id="nationalityId" type="text" name="nationalityId"   [(ngModel)]="information.nationalityId" required  [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.nationalityId}" type="text" class="form-control"  aria-describedby="basic-addon1">
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['nationalityId'].invalid && (f['nationalityId'].dirty || f['nationalityId'].touched)" >
+                                <div *ngIf="f['nationalityId'].errors && f['nationalityId'].errors['required']">Nationality is required.</div>
+                            </small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="religionId">Religion</label>
+                            <select formControlName="religionId" class="form-select" aria-label=".form-select-lg example" name="religionId" id="religionId" [(ngModel)]="information.religionId" required  [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.bloodGroupId}">
+                            
+                                <option selected>Select</option>
+                                <option *ngFor="let data of dropdownReligion">{{data.code}}</option>
+                             
+                            </select>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['religionId'].invalid && (f['religionId'].dirty || f['religionId'].touched)" >
+                                <div *ngIf="f['religionId'].errors && f['religionId'].errors['required']">Religion is required.</div>
+                            </small>
+                        </div>
+
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="bloodGroupId">Blood Group</label>
+                            <select formControlName="bloodGroupId"  class="form-select" aria-label=".form-select-lg example" name="bloodGroupId" id="bloodGroupId" [(ngModel)]="information.bloodGroupId" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.bloodGroupId}">
+                            
+                                <option selected>Select</option>
+                                <option *ngFor="let data of dropdownBlood">{{data.code}}</option>
+                             
+                            </select>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['bloodGroupId'].invalid && (f['bloodGroupId'].dirty || f['bloodGroupId'].touched)" >
+                                <div *ngIf="f['bloodGroupId'].errors && f['bloodGroupId'].errors['required']">Blood GroupId is required.</div>
+                            </small>
+                           
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="maritalStatusId">Marital Status</label>
+                           <select formControlName="maritalStatusId" class="form-select" aria-label="Default select example" name="name" id="name" [(ngModel)]="information.maritalStatusId" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.maritalStatusId}">
+                            
+                                <option  selected>Select</option>
+                                <option *ngFor="let data of dropdownMarital">{{data.code}}</option>
+                             
+                            </select>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['maritalStatusId'].invalid && (f['maritalStatusId'].dirty || f['maritalStatusId'].touched)" >
+                                <div *ngIf="f['maritalStatusId'].errors && f['maritalStatusId'].errors['required']">Marital Status is required.</div>
+                            </small>
+                            
+                        </div>
+                        <div class="field col-12 md:col-4">
+                            <label htmlFor="genderId">Gender</label>
+                            <select formControlName="genderId" class="form-select" aria-label=".form-select-lg example"   name="genderId" id="genderId" [(ngModel)]="information.genderId" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !information.maritalStatusId}">
+                            
+                                <option selected>Select</option>
+                                <option *ngFor="let data of dropdownGender">{{data.code}}</option>
+                            </select>
+                            <small class="ng-dirty ng-invalid text-danger" *ngIf="f['genderId'].invalid && (f['genderId'].dirty || f['genderId'].touched)" >
+                                <div *ngIf="f['genderId'].errors && f['genderId'].errors['required']">Gender is required.</div>
+                            </small>
+                        </div>
+
+                    </div>
+                
+            </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button [disabled]="!form.valid"  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateInformation()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteInformationDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="information">Are you sure you want to delete <b>{{information.firstName}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deleteInformationDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>

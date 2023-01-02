@@ -1,0 +1,166 @@
+<div class="card">
+<div class="grid">
+    
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card px-0 py-0">
+            
+          
+            
+
+            <p-table #dt [value]="registers"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['firstName','register.firstName','dob','register.dob','mobile','register.mobile','email','register.email','preferenceCountryId','register.preferenceCountryId']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        
+                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="addRegisterData()" [routerLink]="['/register/addoredit/']"></button>
+                            <h5 class="m-0">Manage Regestation</h5>
+                            <!-- <button pButton pRipple label="Agrement" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/studentAg/list/']"></button> -->
+                        
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            <!-- <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button> -->
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="no">No<p-sortIcon field="no"></p-sortIcon></th>
+                        <th pSortableColumn="firstName">Name<p-sortIcon field="firstName"></p-sortIcon></th>
+
+                        <th pSortableColumn="dob">Date of Birth <p-sortIcon field="dob"></p-sortIcon></th>
+                        <th pSortableColumn="mobile">mobile<p-sortIcon field="mobile"></p-sortIcon></th>
+                        <th pSortableColumn="email">email<p-sortIcon field="email"></p-sortIcon></th>
+                        <th pSortableColumn="preferenceCountryId">Preference Country<p-sortIcon field="preferenceCountryId"></p-sortIcon></th>
+                        <th pSortableColumn="lastUniversity">Last University Country<p-sortIcon field="lastUniversity"></p-sortIcon></th>
+                       
+                       
+                        
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-register let-rowIndex="rowIndex">
+                    <tr>
+
+                        <td style="width:15%; min-width:6rem;">
+                            <span class="p-column-title">No</span>
+                            <i class="pi pi-fw pi-chevron-right"></i>
+                             {{rowIndex + 1}}
+                         </td>
+                      
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">firstName</span>
+                            {{register.firstName}}
+                        </td>
+
+                       
+                        <td style="width:5%; min-width:12rem;">
+                            <span class="p-column-title">dob</span>
+                            {{register.dob | date:"yyyy-MM-dd"}}
+
+                        </td>
+                        <td style="width:5%; min-width:10rem;">
+                            <span class="p-column-title">Description</span>
+                            {{register.mobile}}
+
+                        </td><td style="width:5%; min-width:10rem;">
+                            <span class="p-column-title">Description</span>
+                            {{register.email}}
+
+                        </td>
+                       <td style="width:5%; min-width:15rem;">
+                            <span class="p-column-title">preferenceCountryId</span>
+                            {{register.preferenceCountryId}}
+
+                        </td>
+                        
+                        <td style="width:5%; min-width:10rem;">
+                            <span class="p-column-title">lastUniversity</span>
+                            {{register.lastUniversity}}
+
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" [routerLink]="['/register/', register.id]"></button>
+                               
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-template>
+            </p-table>
+        </div>
+
+        <!-- <p-dialog [(visible)]="registerDialog" [style]="{width: '900px'}" header="Regestation Details" [modal]="true" class="p-fluid">
+           
+            <ng-template pTemplate="content">
+                
+                <div class="col-12">                      
+                        <div class="p-fluid p-formgrid grid">
+
+                            
+
+                            <div class="field col-4">
+                                <label htmlFor="firstName">First Name</label>
+                                <input pInputText id="firstName" type="text"  name="firstName" [(ngModel)]="register.firstName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.firstName}"   />
+                            </div>
+                           
+                            
+
+                            
+
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastName">Last Name</label>
+                                <input pInputText id="lastName" type="text" name="lastName"   [(ngModel)]="register.lastName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.lastName}" />
+                            </div>
+                            
+                            <div class="field col-4">
+                                <label htmlFor="address">Mobile</label>
+                                <input pInputTextarea id="mobile" type="number" name="mobile"   [(ngModel)]="register.mobile" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.mobile}" />
+                            </div>
+                            <div class="field col-4">
+                                <label htmlFor="address">Email</label>
+                                <input pInputTextarea id="email" type="email" name="email"   [(ngModel)]="register.email" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.email}" />
+                            </div>
+                            <div class="field col-4">
+                                <label htmlFor="address">Passport No</label>
+                                <input pInputTextarea id="passportNo" type="text" name="passportNo"   [(ngModel)]="register.passportNo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.passportNo}" />
+                            </div>
+                            <div class="field col-4">
+                                <label htmlFor="address">Date of Birth</label>
+                                <p-calendar [showIcon]="true" inputId="icon" name="dob"   [(ngModel)]="register.dob" autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.dob}" ></p-calendar>
+                            </div>
+                            <div class="field col-4">
+                                <label htmlFor="address">Preference Country</label>
+                                <p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true" name="firstName"   [(ngModel)]="register.preferenceCountryId"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.preferenceCountryId}" >
+                                </p-autoComplete>
+                            </div>
+                            
+                            
+                            <div class="field col-4 md:col-4">
+                                <label htmlFor="gender">Gender</label>
+                                <p-dropdown [options]="dropdownGender" optionLabel="name" [(ngModel)]="selectedGender" name="gender"   [(ngModel)]="register.gender"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !register.gender}" ></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateRegister()"></button>
+            </ng-template>
+        </p-dialog> 
+        
+        <p-dialog [(visible)]="deleteRegisterDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="register">Are you sure you want to delete <b>{{register.middleName}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deleteRegisterDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog> -->
+    </div>
+</div>
+</div>

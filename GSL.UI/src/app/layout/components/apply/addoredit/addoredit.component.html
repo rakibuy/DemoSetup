@@ -1,0 +1,119 @@
+<div class="card" [formGroup]="productform">
+
+    
+    <div>
+        <button pButton styleClass="p-button-sm" pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/apply/list']"></button>
+        <br>
+        <br>
+        
+    </div>
+    
+    
+    <p-toast></p-toast>
+            <div class="card">
+                <h5>Master</h5>
+                <div class="col-12">
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field col-3">
+                            <label htmlFor="registrationId">Student Name<span class="text-danger">*</span></label>
+                            <p-dropdown formControlName="registrationId" inputId="dropdown" [autoDisplayFirst]="false" [(ngModel)]="apply.registrationId" [options]="studenregistation"  optionValue="id" optionLabel="firstName" class="ng-dirty" placeholder="Select"></p-dropdown>
+                            <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !apply.registrationId">Student Name is required.</small> -->
+
+                            
+                        </div>
+
+                       
+                       
+                        <div class="field col-3">
+                            <label htmlFor="issueDate">Issue Date <span class="text-danger">*</span></label>
+                            <input type="date" pInputText  formControlName="issueDate"  [(ngModel)]="apply.issueDate" class="ng-dirty" >
+                            <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !apply.issueDate">Issue Date is required.</small> -->
+                        </div>
+                        <div class="field col-3">
+                            <label htmlFor="applyDate">Apply Date <span class="text-danger">*</span></label>
+                            <input type="date" pInputText  formControlName="applyDate" [(ngModel)]="apply.applyDate" class="ng-dirty" >
+                            <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !apply.issueDate">Issue Date is required.</small> -->
+                            
+                            
+                        </div>
+
+                        <div class="field col-3">
+                            <label htmlFor="status">Status </label>
+                            <p-dropdown formControlName="status" inputId="dropdown" [autoDisplayFirst]="false" [(ngModel)]="apply.status" [options]="status" class="ng-dirty" placeholder="Select" optionValue="name" optionLabel="name"></p-dropdown>
+                            
+                            <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !apply.staffId">Staff Name is required.</small> -->
+                           
+                        </div>
+                        
+                       
+                            <h5> Details </h5>
+                            <div class="col-12">
+                                    <ng-container >
+                                        <div class="grid formgrid">
+                                                <div class="field col-3">
+                                                    <label class="ml-2">Country <span class="text-danger">*</span></label>
+                                                </div>
+                                                <div class="field col-3">
+                                                    <label class="ml-3">Subject <span class="text-danger">*</span></label>
+                                                </div>
+                                               
+                                                <div class="field col-3">
+                                                    <label class="ml-2">Follow Up Date <span class="text-danger">*</span></label>
+                                                </div>
+     
+                                                
+                                                
+                                        </div>
+                                    </ng-container>
+                                
+                                <ng-container formGroupName="applyDetails">
+                                    <ng-container *ngFor="let itemGroup of applyDetails.controls; let i = index; let lst= last; let fst=first;" [formGroupName]="i">
+                                        <div class="grid formgrid" >
+                                            <input type="hidden" aria-label="First name" class="form-control" formControlName="id">
+                                            <input type="hidden" aria-label="First name" class="form-control" formControlName="applyMasterId">
+                                            
+                                            <div class="field col-3">
+                                                <!-- <input formControlName="countryId" type="text" aria-label="First name" class="form-control"> -->
+                                                <p-dropdown formControlName="countryId" inputId="dropdown" [autoDisplayFirst]="false" [options]="countries" optionValue="name" optionLabel="name" class="ng-dirty" placeholder="Select"></p-dropdown>
+                                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !itemGroup.get('countryId')">Country is required.</small>
+                                            </div>
+
+                                            
+
+                                            <div class="field col-3">
+                                                <!-- <input formControlName="subjectId" type="text" aria-label="First name" class="form-control"> -->
+                                                <p-dropdown formControlName="subjectId" inputId="dropdown" [autoDisplayFirst]="false" [options]="studentSubject" optionValue="id" optionLabel="name" class="ng-dirty" placeholder="Select"></p-dropdown>
+                                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !itemGroup.get('subjectId')">Subject is required.</small>
+                                            </div>
+
+                                            
+
+                                            <div class="field col-3">
+                                                <!-- <input formControlName="followUpDate" type="text" aria-label="First name" class="form-control"> -->
+                                                <input pInputText type="date"  formControlName="followUpDate" class="ng-dirty" >
+                                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !itemGroup.get('followUpDate')">Follow Up Date is required.</small> -->
+                                            </div>
+                
+                                            <div class="field col-12 md:col-1">
+                                                
+                                                <button *ngIf="lst" (click)="addDetailsItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                                <button *ngIf="!lst" (click)="removeAtDetails(i)" type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                                            </div>
+                
+                
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                              
+                            </div>
+                        
+                      
+                    </div>
+                
+                </div>
+                <div class="content-section implementation mt-5" >
+                    <p-button  [disabled]="!productform.valid" label="Submit" icon="pi pi-check" iconPos="right" class="mx-1 p-button-sm" (click)="addOrUpdateDetails()"></p-button>
+                    <p-button label="Cancel" icon="pi pi-check" iconPos="right" class="mx-1 p-button-sm" [routerLink]="['/apply/list']"></p-button>
+               </div>
+            </div>
+</div>

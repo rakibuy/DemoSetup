@@ -1,0 +1,161 @@
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+
+                    </div>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="universities"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Payment</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name">Company Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Branch <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Registration No <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Score Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="name">Score Value <p-sortIcon field="name"></p-sortIcon></th>
+                       <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-university>
+                    <tr>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{ university.name }}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Description</span>
+                            {{university.duration}}
+
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{ university.name }}
+                        </td>
+
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Description</span>
+                            {{university.duration}}
+
+                        </td>
+                        <td style="width:10%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{ university.name }}
+                        </td>
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUiversity(university)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUniversity(university)"></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="universityDialog" [style]="{width: '750px'}" header="Payments" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+
+                <div class="col-12">
+                    
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="zip">Company GroupId</label>
+                                <input pInputText id="zip" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="zip">CompanyId</label>
+                                <input pInputText id="zip" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="zip">BranchId</label>
+                                <input pInputText id="zip" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="firstname2">Fiscal PeriodId</label>
+                                <input pInputText id="firstname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Fiscal YearId</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Cash MasterId</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">BankId</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">COA Level4Id</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Payment Source</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Party Type</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">PartyId</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Voucher No</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Voucher Date</label>
+                                <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Posting Date</label>
+                                <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="lastname2">Narration</label>
+                                <input pInputText id="lastname2" type="text" />
+                            </div>
+                            
+                    </div> 
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateUniversity()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteUniversityDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="university">Are you sure you want to delete <b>{{university.name}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deleteUniversityDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>

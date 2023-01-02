@@ -1,0 +1,217 @@
+<div class="card" [formGroup]="productform">
+
+    
+    <div>
+        <button pButton styleClass="p-button-sm" pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/payment/list']"></button>
+        <br>
+        <br>
+    </div>
+    
+    
+    <p-toast></p-toast>
+            <div class="card">
+                <h5 class="text-primary">Payment Voucher Entry</h5>
+                <div class="col-12">
+                    <div class="p-fluid p-formgrid grid">
+
+                        <div class="field col-6">
+                            <div class="field col-12" style="margin: 0;">
+                                <label htmlFor="voucherNo">Voucher No <span class="text-danger">*</span></label> 
+                                <input type="text" pInputText  formControlName="voucherNo" [(ngModel)]="InvoiceNo" readonly [(ngModel)]="payment.voucherNo" class="ng-dirty" >
+                                
+                            </div>
+    
+                            <div class="field col-12" style="margin: 0;" >
+                                <label htmlFor="partyId">Party<span class="text-danger"> *</span></label>
+                                <!-- <p-dropdown formControlName="partyId" inputId="dropdown" [autoDisplayFirst]="false" [(ngModel)]="payment.partyId" (onChange)="selectAgremetList($any($event.target).value)" [options]="gelAllStudentDropdown"  optionValue="code" optionLabel="name" class="ng-dirty" placeholder="Select"></p-dropdown> -->
+                                
+                                <select pInputText formControlName="partyId" [(ngModel)]="payment.partyId"  (change)="selectAgremetList($any($event.target).value)">
+                                    
+                                    <option  *ngFor="let state of gelAllStudentDropdown"  value= {{state.code}}>{{state.name}}</option>
+                                </select>
+                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !payment.partyId">Party is required.</small>
+                            </div>
+
+                            <div class="field col-12" style="margin: 0;" >
+                                <label htmlFor="agreementId">Party Agreement<span class="text-danger"> *</span></label>
+                                <!-- <p-dropdown formControlName="agreementId" inputId="dropdown" [autoDisplayFirst]="false" [(ngModel)]="payment.agreementId" (onChange)="AmountDetials($any($event.target).value)" [options]="agreementList"  optionValue="code" optionLabel="name" class="ng-dirty" placeholder="Select"></p-dropdown> -->
+                                <select pInputText [(ngModel)]="payment.agreementId" formControlName="agreementId" (change)="AmountDetials($any($event.target).value)">
+                                    
+                                    <option *ngFor="let state of agreementList" value= {{state.code}}>{{state.name}}</option>
+                                </select>
+                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !payment.agreementId">Agreement is required.</small>
+                            </div>
+
+                            <div class="field col-12" style="margin: 0;" >
+
+                                <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>Payable: </td>
+                                        <td class="text-danger text-capitalize fw-bold">{{singleAgreement.totalPayable}}</td>
+                
+                                      </tr>
+                                      <tr>
+                                        <td>Pay:</td>
+                                        <td class="text-danger text-capitalize fw-bold">{{singleAgreement.totalPay}}</td>
+                                      </tr>
+                
+                                      <tr>
+                                        <td>Remaining Pay:</td>
+                                        <td class="text-danger text-capitalize fw-bold">{{singleAgreement.remainingPay}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                            <!-- <div class="field col-12" style="margin: 0;">
+                                <div class="col-12 grid">
+                                    <div class="col-3">
+                                        <label htmlFor="registrationId"> Cash/Bank<span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <label class="form-check-label" for="inlineRadio2">Cash</label>
+                                          </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" (onChange)="BankById()" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                            <label class="form-check-label" for="inlineRadio1">Bank</label>
+                                          </div>
+                                          
+                                    </div>
+
+                                </div>
+                                
+                                
+                                <p-dropdown formControlName="partyId" inputId="dropdown" [autoDisplayFirst]="false" [(ngModel)]="payment.partyId" [options]="studenregistation"  optionValue="id" optionLabel="firstName" class="ng-dirty" placeholder="Select"></p-dropdown>
+                                
+    
+                            </div> -->
+                        </div>
+                        <div class="field col-6">
+                            <div class="field col-12" style="margin: 0;">
+                                <label  htmlFor="postingDate">Posting Date <span class="text-danger">*</span></label>
+                                <input type="date" [min]="20022-01-24" pInputText  formControlName="postingDate" readonly  [(ngModel)]="payment.postingDate" class="ng-dirty" >
+                            </div>
+    
+                            
+    
+                            <div class="field col-12" style="margin: 0;">
+                                <label htmlFor="voucherDate">Voucher Date <span class="text-danger">*</span></label>
+                                <input type="date" pInputText  formControlName="voucherDate" [(ngModel)]="payment.voucherDate" class="ng-dirty" >
+                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !apply.issueDate">Issue Date is required.</small> -->  
+                            </div>
+                           
+                            <div class="field col-12" style="margin: 0;">
+                                <label htmlFor="narration">Narration</label>
+                                <input type="text" pInputText  formControlName="narration"  [(ngModel)]="payment.narration" class="ng-dirty" >
+                                
+                            </div>
+
+                            <div class="field col-6" style="margin: 0;" >
+
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Agreement: </td>
+                                            <td class="text-danger text-capitalize fw-bold">{{amountDetials.totalAgrementNumber}}</td>
+                    
+                                          </tr>
+                                      <tr>
+                                        <td>Total Payable: </td>
+                                        <td class="text-danger text-capitalize fw-bold">{{amountDetials.totalPayable}}</td>
+                
+                                      </tr>
+                                      <tr>
+                                        <td>Total Pay:</td>
+                                        <td class="text-danger text-capitalize fw-bold">{{amountDetials.totalPay}}</td>
+                                      </tr>
+                
+                                      <tr>
+                                        <td>Remaining Pay:</td>
+                                        <td class="text-danger text-capitalize fw-bold">{{amountDetials.remainingPay}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                        
+                            
+
+                           
+                       
+                        
+                            <h5 class="text-primary"> Payment Voucher Details </h5>
+                            <div class="col-12">
+                                    <ng-container >
+                                        <div class="grid formgrid">
+                                                <div class="field col-5">
+                                                    <label class="ml-3">Amount Head <span class="text-danger">*</span></label>
+                                                </div>
+                                                <div class="field col-5">
+                                                    <label class="ml-3">Amount <span class="text-danger">*</span></label>
+                                                </div> 
+                                        </div>
+                                    </ng-container>
+                                
+                                <ng-container formGroupName="paymentsDetails">
+                                    <ng-container *ngFor="let itemGroup of paymentsDetails.controls; let i = index; let lst= last; let fst=first;" [formGroupName]="i">
+                                        <div class="grid formgrid" >
+                                            <input type="hidden" aria-label="First name" class="form-control" formControlName="id">
+                                            <input type="hidden" aria-label="First name" class="form-control" formControlName="paymentId">
+                                            
+
+
+                                            <div class="field col-5">
+                                                <!-- <input formControlName="followUpDate" type="text" aria-label="First name" class="form-control"> -->
+                                                <input pInputText type="text"  formControlName="amountTitle" class="ng-dirty" >
+                                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !itemGroup.get('followUpDate')">Follow Up Date is required.</small> -->
+                                            </div>
+
+                                            <div class="field col-5">
+                                                <!-- <input formControlName="followUpDate" type="text" aria-label="First name" class="form-control"> -->
+                                                <input pInputText type="number" placeholder="0.00"  formControlName="amount" (change)="Itemcalculation(i)" class="ng-dirty" >
+                                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !itemGroup.get('followUpDate')">Follow Up Date is required.</small> -->
+                                            </div>
+                
+                                            <div class="field col-12 md:col-1">
+                                                <button *ngIf="lst" (click)="addDetailsItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                                <button *ngIf="!lst" (click)="removeAtDetails(i)" type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                                            </div>
+
+                                        </div>
+                                        
+                                       
+                                        
+                                    </ng-container>
+                                    
+                                    
+                                </ng-container>
+                                <div class="grid formgrid">
+
+                                    <div class="field col-5">
+                                        
+                                        <h6 class="text-end" style="margin: 13px;">Total :</h6>
+                                    </div>
+                                    <div class="field col-5">
+                                        <input pInputText type="number" [(ngModel)]="payment.totalAmount" readonly formControlName="totalAmount"  class="ng-dirty" >
+                                    </div>
+                                </div>
+
+                                
+                              
+                            </div>
+                        
+                      
+                    </div>
+                
+                </div>
+               
+                <div class="content-section implementation mt-5" >
+                    <p-button  [disabled]="!productform.valid" label="Submit" icon="pi pi-check" iconPos="right" class="mx-1 p-button-sm" (click)="addOrUpdateDetails()"></p-button>
+                    <p-button label="Cancel" icon="pi pi-check" iconPos="right" class="mx-1 p-button-sm" [routerLink]="['/apply/list']"></p-button>
+               </div>
+               
+            </div>
+</div>

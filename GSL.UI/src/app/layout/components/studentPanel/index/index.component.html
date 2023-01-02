@@ -1,0 +1,503 @@
+<div [formGroup]="productform">
+<div class="flex flex-column md:flex-row gap-5" style="min-height: 81vh">
+    <!-- Profile Sidebar Start -->
+    <div class="md:w-25rem border-1 surface-border surface-card border-round">
+        <div class="flex flex-column align-items-center border-bottom-1 surface-border p-6">
+            <img src="assets/layout/images/avatar-f-1@2x.png" class="w-6rem h-6rem border-circle shadow-4" alt="Asiya Javayant">
+            <span  class="text-900 text-xl font-semibold mt-4">{{indexShow.firstName}} </span>
+           </div>
+           <div class="w-full flex row-gap-4 flex-column surface-border p-4">
+            <div class="flex flex-row gap-4 md:flex-column overflow-auto">
+             <h5>Name: {{indexShow.firstName}} </h5>
+             <h5>Email: {{indexShow.email}} </h5>
+             <h5>Mobile Number: {{indexShow.mobile}} </h5>
+             <h5>Date of Birth: {{indexShow.dob | date:'dd-MM-yyyy'}} </h5>
+            </div>
+           </div>
+    </div>
+    <!-- Profile Sidebar End -->
+
+    <!-- Profile Box Start -->
+    <div class="flex-1 border-1 surface-border surface-card border-round">
+        <div class="flex flex-column h-full">
+             <!-- Profile Box Header start -->
+            <div class="flex align-items-center  pt-4 p-2 px-6">
+                <!-- <div class="col-12">
+                <button (click)="activeIndex1 = 0" pButton pRipple type="button" label="Basic Info" class="p-button-raised col-2 p-button-info mx-2"></button>
+                <button (click)="activeIndex1 = 1" pButton pRipple type="button" label="Qualification" class="p-button-raised col-2 p-button-success mx-2"></button>
+                <button (click)="activeIndex1 = 2" pButton pRipple type="button" label="Einglish Test" class="p-button-raised col-2 p-button-info mx-2"></button>
+                <button (click)="activeIndex1 = 3" pButton pRipple type="button" label="Documents" class="p-button-raised col-2 p-button-success mx-2"></button>
+              
+               
+                <button (click)="activeIndex1 = 4" pButton pRipple type="button" label="Agreement" class="p-button-raised col-2  p-button-info mx-2"></button>
+                <button (click)="activeIndex1 = 5" pButton pRipple type="button" label="Passport Details" class="p-button-raised col-3  p-button-success mx-2  mt-3"></button>
+                <button (click)="activeIndex1 = 6" pButton pRipple type="button" label="Visa Hostory" class="p-button-raised col-2  p-button-info mx-2"></button>
+              
+                </div> -->
+                
+            </div>
+            <!-- Profile Box Header end -->
+
+             <!-- Profile Box Body Start -->
+            <div class=" md:px-1 lg:px-2   overflow-y-auto" style="max-height: 90vh;" #chatWindow [scrollTop]="chatWindow.scrollHeight">
+                
+                   
+               
+                    <p-tabView [(activeIndex)]="activeIndex1">
+                        <!-- Basic info Start -->
+                        <p-tabPanel header="Basic Info">
+                            <div class="col-12">
+                                <div class="card">
+                                    <h5>Basic Information</h5>
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="firstName">Name</label>
+                                            <input pInputText id="firstName" [ngModel]="register.firstName" type="text" formControlName="firstName" />
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="dob">Date of Birth</label>
+                                            <input pInputText id="dob" type="date" [ngModel]="register.dob" formControlName="dob"  />
+                                        </div>
+                                        <div class="field col-12 md:col-6
+                                        ">
+                                            <label htmlFor="address">Mobile No</label>
+                                            <input pInputText id="mobile" type="text" [ngModel]="register.mobile" formControlName="mobile" />
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="city">Email</label>
+                                            <input pInputText id="city" type="text" [ngModel]="register.email" formControlName="email" />
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="state">Prefarence County</label>
+                                            
+                                            <p-dropdown formControlName="preferenceCountryId" inputId="dropdown" [autoDisplayFirst]="false" [(ngModel)]="register.preferenceCountryId" [options]="countries"  placeholder="Select" optionValue="name" optionLabel="name"></p-dropdown>
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="zip">Last University</label>
+                                            <input pInputText id="zip" type="text" [ngModel]="register.lastUniversity" formControlName="lastUniversity" />
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </p-tabPanel>
+                         <!-- Basic info End -->
+
+                          <!-- Qualification Start -->
+                        <p-tabPanel header="Qualification">
+                            <div class="col-12">
+                                <div class="card">
+                                    <h5>Qualification</h5>
+                                <ng-container>
+                                    <div class="grid formgrid">
+                                        
+                                        <div class="field col-3">
+                                            <label class="ml-2">Name of Degree <span class="text-danger">*</span> </label>
+                                        </div>
+                                        <div class="field col-3">
+                                            <label class="ml-2">Subject <span class="text-danger">*</span></label>
+                                        </div>
+                        
+                                        <div class="field col-2">
+                                            <label class="ml-2">Result <span class="text-danger">*</span></label>
+                                        </div>
+                        
+                                        <div class="field col-3">
+                                            <label class="ml-2">Passing Year <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <!-- Start Items -->
+                                <ng-container formArrayName="academicQualifications" >
+                            <ng-container *ngFor="let itemGroup of academicQualifications.controls; let i = index; let lst= last; let fst=first;" [formGroupName]="i">
+                                <div class="grid formgrid">
+                                    <!-- [formGroup]="convertToGroup(itemGroup)" -->
+        
+                                    
+                                    <input  type="hidden" aria-label="First name" class="form-control" formControlName="id">
+                                    <input type="hidden" aria-label="First name" class="form-control" formControlName="registrationId">
+                                    <div class="field col-3" >
+                                        <select pInputText formControlName="degreeName" class="form-select" aria-label="Select">
+                                            <option selected>Select</option>
+                                            <option>SSC/O Level</option>
+                                            <option>HSC / A Level / Diploma</option>
+                                            <option>Bachelor(BBA/BSC)</option>
+                                            <option>Master's(MBA/MSC)</option>
+                                            <option>Others's</option>
+                                        </select>
+                                        <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                            <div *ngIf="submitted && itemGroup.get('degreeName')?.hasError('required')">
+                                                Degree  Name is required
+                                            </div>
+                                            
+                                        </small> -->
+                                    </div>
+                                    <div class="field col-3">
+                                       
+                                       
+        
+                                        <select pInputText formControlName="subjectName" class="form-control" >
+                                            <option selected> Select </option>
+                                            <option *ngFor="let item of subjectData" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                       
+                                        <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                            <div *ngIf="submitted && itemGroup.get('subjectName')?.hasError('required')">
+                                                Subject  Name is required
+                                            </div>
+                                        </small> -->
+                                    </div>
+        
+                                    <div class="field col-2">
+                                        <input pInputText type="text" placeholder="5.00" aria-label="result" class="form-control" formControlName="result">
+                                        <small class="ng-dirty ng-invalid text-danger" >
+                                            
+                                            <div *ngIf="itemGroup.get('result')?.hasError('pattern')">
+                                               Invalid Result
+                                            </div>
+                                        </small>
+                                    </div>
+        
+                                    <div class="field col-3">
+                                        <input pInputText type="text" placeholder="2021 OR 2021-2022" aria-label="passingYear" class="form-control" formControlName="passingYear">
+                                        <small class="ng-dirty ng-invalid text-danger" >
+                                            <div *ngIf="itemGroup.get('passingYear')?.hasError('pattern')">
+                                                Invalid Passing Year
+                                             </div>
+                                        </small>
+                                    </div>
+        
+                                    
+        
+                                    <div class="field col-12 md:col-1">
+                                        
+                                        <button *ngIf="lst" (click)="addQualificationItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                        <button *ngIf="!lst" (click)="removeAtQualification(i)"  type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                                    </div>
+        
+        
+                                </div>
+                            </ng-container>
+                                </ng-container>
+                                <!-- End Items -->
+                               </div>
+                            </div>
+                        </p-tabPanel>
+                        <!-- Qualification End -->
+
+                        <!-- Einglish test Start -->
+                        <p-tabPanel header="Einglish Test">
+                            <div class="col-12">
+                                <ng-container >
+                                    <div class="grid formgrid">
+                                            <div class="field col-2">
+                                                <label class="ml-2">Test Name </label>
+                                            </div>
+                                            <div class="field col-2">
+                                                <label class="ml-2">Overall Score </label>
+                                            </div>
+                                            <div class="field col-2">
+                                                <label class="ml-2">Listening </label>
+                                            </div>
+                            
+                                            <div class="field col-1">
+                                                <label class="ml-2">Reading </label>
+                                            </div>
+                                            <div class="field col-1">
+                                                <label class="ml-1">Writing </label>
+                                            </div>
+                            
+                                            <div class="field col-1">
+                                                <label class="ml-1">Speaking </label>
+                                            </div>
+                                            <div class="field col-2">
+                                                <label class="ml-2">Refused Any Country</label>
+                                            </div>              
+                                    </div>
+                                </ng-container>
+                                <!-- Start Items -->
+                            <ng-container formArrayName="scores">
+                                <ng-container *ngFor="let item of scores.controls let i = index; let lst= last; let fst=first" [formGroupName]="i">
+                                    <div class="grid formgrid" >
+                                        
+                                       
+                                            <input type="hidden" aria-label="registrationId" class="form-control" formControlName="id">
+                                            
+                                            <input type="hidden" aria-label="registrationId" class="form-control" formControlName="registrationId">
+                                            
+            
+                                        <div class="field col-2">
+                                            <select pInputText placeholder="selectd" id="scoreName" class="form-control" formControlName="scoreName" >
+                                                <option selected>Select</option>
+                                                <option>IELTS</option>
+                                                <option>TOEFL</option>
+                                                <option>PTE</option>
+                                                <option>GRE</option>
+                                            </select>
+                                            
+                                        </div>
+                                        <div class="field col-2">
+                                            <input pInputText type="text" aria-label="First name" class="form-control" formControlName="overallScore" >
+                                            <small class="ng-dirty ng-invalid text-danger" >
+                                                
+                                                <div *ngIf="item.get('overallScore')?.hasError('pattern')">
+                                                   Invalid
+                                                </div>
+                                            </small>
+                                        </div>
+            
+                                        <div class="field col-2">
+                                            <input pInputText type="text" aria-label="listening" class="form-control" formControlName="listening">
+                                            <small class="ng-dirty ng-invalid text-danger" >
+                                                <!-- <div *ngIf="item.get('listening')?.hasError('required')">
+                                                   required
+                                                </div> -->
+                                                <div *ngIf="item.get('listening')?.hasError('pattern')">
+                                                   Invalid
+                                                </div>
+                                            </small>
+                                        </div>
+            
+                                        <div class="field col-1">
+                                            <input pInputText type="text" aria-label="reading" class="form-control" formControlName="reading">
+                                            <small class="ng-dirty ng-invalid text-danger" >
+                                                <!-- <div *ngIf="item.get('reading')?.hasError('required')">
+                                                   required
+                                                </div> -->
+                                                <div *ngIf="item.get('reading')?.hasError('pattern')">
+                                                   Invalid
+                                                </div>
+                                            </small>
+                                        </div>
+                                        <div class="field col-1">
+                                            <input pInputText type="text" aria-label="writing" class="form-control" formControlName="writing">
+                                            <small class="ng-dirty ng-invalid text-danger" >
+                                                <!-- <div *ngIf="item.get('writing')?.hasError('required')">
+                                                   required
+                                                </div> -->
+                                                <div *ngIf="item.get('writing')?.hasError('pattern')">
+                                                   Invalid
+                                                </div>
+                                            </small>
+                                        </div>
+                                        <div class="field col-1">
+                                            <input pInputText type="text" aria-label="speaking" class="form-control" formControlName="speaking">
+                                            <small class="ng-dirty ng-invalid text-danger" >
+                                                <!-- <div *ngIf="item.get('speaking')?.hasError('required')">
+                                                    required
+                                                </div> -->
+                                                <div *ngIf="item.get('speaking')?.hasError('pattern')">
+                                                   Invalid 
+                                                </div>
+                                            </small>
+                                        </div>
+                                        <div class="field col-2">
+                                            <input pInputText type="text" aria-label="refusedCountry" class="form-control" formControlName="refusedCountry">
+                                            <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                                <div *ngIf="item.get('refusedCountry')?.hasError('required')">
+                                                    required
+                                                </div>
+                                                
+                                            </small> -->
+                                        </div>
+            
+                                        
+            
+                                        <div class="field col-12 md:col-1">
+                                            
+                                            <button *ngIf="lst"  (click)="addEinglishItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                            <button *ngIf="!lst" (click)="removeAtEinglishPurchase(i)"  type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                                        </div>
+            
+            
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                                <!-- End Items -->
+                            </div>
+                               
+                        </p-tabPanel>
+                        <!-- Einglish test Emd -->
+
+                        <!-- Document  Start -->
+                        <p-tabPanel header="Document">
+                            <div class="col-12">
+                                <div class="card">
+                                    <h5>Documents</h5>
+                                <ng-container>
+                                    <div class="grid formgrid">
+                                        
+                                        <div class="field col-7">
+                                            <label class="ml-2">Select Documents <span class="text-danger">*</span> </label>
+                                        </div>
+                                        <div class="field col-3">
+                                            <label class="ml-2">Document Title <span class="text-danger">*</span></label>
+                                        </div>
+                        
+                                       
+                                    </div>
+                                </ng-container>
+                                <!-- Start Items -->
+                                <ng-container >
+                            <ng-container >
+                                <div class="grid formgrid">
+                                    <!-- [formGroup]="convertToGroup(itemGroup)" -->
+        
+                                    
+                                    <input  type="hidden" aria-label="First name" class="form-control" >
+                                    <input type="hidden" aria-label="First name" class="form-control" >
+                                    <div class="field col-7" >
+                                        <p-fileUpload name="demo[]"  (onUpload)="onUpload($event)"
+                                             accept="image/*">
+                                            <ng-template pTemplate="content">
+                                                <ul *ngIf="uploadedFiles.length">
+                                                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                                </ul>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                    </div>
+                       
+        
+                                   
+        
+                                    <div class="field col-3">
+                                        <input pInputText type="text"  class="form-control" >
+                                    </div>
+        
+                                    
+        
+                                    <div class="field col-12 md:col-1">
+                                        
+                                        <button   type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                        <button   type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                                    </div>
+        
+        
+                                </div>
+                            </ng-container>
+                                </ng-container>
+                                <!-- End Items -->
+                               </div>
+                            </div>
+                               
+                        </p-tabPanel>
+                         <!-- Document  End -->
+
+                          <!-- Agreement  Start -->
+                        <p-tabPanel header="Agreement">
+                            <div class="col-12">
+                                <ng-container formArrayName="agreements">
+                                    
+                                    <ng-container *ngFor="let item of agreements.controls let i = index; let lst= last; let fst=first" [formGroupName]="i">
+                                        
+                                        <div class="grid formgrid" >
+                                            
+                                          
+                                                <div class="card">
+                                                   
+                                                    <h5>Agreement</h5>
+                                                    
+                                                    <div class="p-fluid p-formgrid grid">
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="agreementDate">Agreement Date</label>
+                                                            <input pInputText id="agreementDate"  type="text" formControlName="agreementDate" />
+                                                        </div>
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="beforVisaCost">Befor Visa Cost</label>
+                                                            <input pInputText id="beforVisaCost"  type="text" formControlName="beforVisaCost" />
+                                                        </div>
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="registrationFees">Registration Fees</label>
+                                                            <input pInputText id="registrationFees"  type="text" formControlName="registrationFees" />
+                                                        </div>
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="afterVisaServiceCharge">University Application Fees</label>
+                                                            <input pInputText id="universityApplicationFees"  type="text" formControlName="universityApplicationFees" />
+                                                        </div>
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="afterVisaServiceCharge">After VisaService Charge</label>
+                                                            <input pInputText id="afterVisaServiceCharge"  type="text" formControlName="afterVisaServiceCharge" />
+                                                        </div>
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="remarks">remarks</label>
+                                                            <input pInputText id="remarks"  type="text" formControlName="remarks" />
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div> 
+                                            
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                               
+                        </p-tabPanel>
+                         <!-- Agrreement End -->
+
+                             <!-- Passport  Start -->
+                        <p-tabPanel header="Passport">
+                            <div class="col-12">
+                                <ng-container formArrayName="passports">
+                                    
+                                    <ng-container *ngFor="let item of passports.controls let i = index; let lst= last; let fst=first" [formGroupName]="i">
+                                        
+                                            <div class="grid formgrid">
+                                                <div class="card col-12">
+                                                        <h5>Passport</h5>
+                                                    
+                                                        <!-- <input pInputText id="firstName"  type="hidden" formControlName="id" />                                                         -->
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="afterVisaServiceCharge">Passport Number</label>
+                                                            <input pInputText id="passportNumber"  type="text" formControlName="passportNumber" />
+                                                        </div>
+
+                                                        <div class="field col-12 md:col-6">
+                                                            <label htmlFor="placeOfIssue">Place Of Issue</label>
+                                                            <input pInputText id="placeOfIssue"  type="text" formControlName="placeOfIssue" />
+                                                        </div>
+
+                                                        <div class="field col-6">
+                                                            <label htmlFor="afterVisaServiceCharge">Issue Date</label>
+                                                            <input pInputText id="afterVisaServiceCharge"  type="date" formControlName="issueDate" />
+                                                        </div>
+
+                                                        <div class="field col-6">
+                                                            <label htmlFor="expireDate">expireDate</label>
+                                                            <input pInputText id="expireDate"  type="date" formControlName="expireDate" />
+                                                        </div>
+
+                                                        <div class="field col-6">
+                                                            <label htmlFor="expireDate">Remarks</label>
+                                                            <input pInputText id="remarks"  type="date" formControlName="remarks" />
+                                                        </div>
+
+                                                </div>
+                                                        
+                                            </div>
+                                    </ng-container>
+                                </ng-container>
+                            
+                            </div>
+                               
+                        </p-tabPanel>
+                         <!-- Passport End -->
+
+                    </p-tabView>
+                
+            </div>
+             <!-- Profile Box Body end -->
+              <!-- Profile Box Footer Start -->
+            <!-- <div class="p-3 md:p-4 lg:p-6 flex flex-column sm:flex-row align-items-center mt-auto border-top-1 surface-border gap-3">
+               <h1>Body Footer</h1>
+            </div> -->
+             <!-- Profile Box Footer end -->
+           </div>
+    </div>
+     <!-- Profile Box end -->
+</div>
+</div>

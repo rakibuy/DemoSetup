@@ -1,0 +1,174 @@
+
+<div class="card">
+    <div class="grid" [formGroup]="form">
+        <div class="col-12">
+            <div class="card px-0 py-0">
+                <p-toast></p-toast>
+                <p-table #dt [value]="registations"   [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['id','firstName','dob','mobile', 'email','lastUniversity','address','assignStatus']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            <div>
+                                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-button-sm mr-2" (click)="openNew()"></button>
+                            </div>
+                            <h5 class="m-0">Manage Visitor</h5>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="no">No <p-sortIcon field="no"></p-sortIcon></th>
+                            <th pSortableColumn="firstName">Name <p-sortIcon field="firstName"></p-sortIcon></th>
+                            <th pSortableColumn="dob">Date Of Birth <p-sortIcon field="dob"></p-sortIcon></th>
+                            <th pSortableColumn="mobile">Contact No <p-sortIcon field="mobile"></p-sortIcon></th>
+                            <th pSortableColumn="email"> Email<p-sortIcon field="email"></p-sortIcon></th>
+                            <th pSortableColumn="lastUniversity">Last University <p-sortIcon field="lastUniversity"></p-sortIcon></th>
+                            <th pSortableColumn="address">Address <p-sortIcon field="address"></p-sortIcon></th>
+                            <th pSortableColumn="assignStatus">Assign Status <p-sortIcon field="assignStatus"></p-sortIcon></th>
+                            
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-registation  let-rowIndex="rowIndex">
+                        <tr>
+                            <td style="width:15%; min-width:6rem;">
+                                <span class="p-column-title">id</span>
+                                {{rowIndex + 1}}
+                            </td>
+                        
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">firstName</span>
+                                {{ registation.firstName }}
+                            </td>
+
+                            <td style="width:25%; min-width:12rem;">
+                                <span class="p-column-title">dob</span>
+                                {{registation.dob | date:'dd-MM-yyyy'}}
+
+                            </td>
+
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">mobile</span>
+                                {{registation.mobile}}
+
+                            </td>
+
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">email</span>
+                                {{registation.email}}
+
+                            </td>
+
+                            <td style="width:25%; min-width:12rem;">
+                                <span class="p-column-title">lastUniversity</span>
+                                {{registation.lastUniversity}}
+
+                            </td>
+
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">address</span>
+                                {{registation.address}}
+
+                            </td>
+                            <td style="width:25%; min-width:11rem;">
+                                <span class="p-column-title">assignStatus</span>
+                                {{registation.assignStatus}}
+
+                            </td>
+
+                            <td>
+                                <div class="flex">
+                                    <button  pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(registation)"></button>
+                                    <!-- <button  pButton pRipple icon="pi pi-bolt" class="p-button-rounded p-button-success mr-2" [routerLink]="['/job-assign/addoredit']"></button> -->
+                                    <button  pButton pRipple icon="pi pi-bolt" class="p-button-rounded p-button-success mr-2" (click)="StudentDropSession(registation.id)"></button>
+                                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button> -->
+                                </div>
+                            </td>
+                        </tr>
+
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="userDialog" [style]="{width: '750px'}" header="Visitor Registration" [modal]="true" class="p-fluid">
+                <ng-template  pTemplate="content">
+                    <div class="col-12">
+                    
+                            
+                        <div class="p-fluid p-formgrid grid">
+
+                    <div class="field col-12 md:col-6">
+                        <label for="fullName">Name</label>
+            
+                        <input formControlName="firstName"  type="text" pInputText id="fullName" name="fullName"   [(ngModel)]="registation.firstName"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !registation.firstName}"/>
+                        
+                        <small class="ng-dirty ng-invalid text-danger" *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched)" >
+                            <div *ngIf="f['firstName'].errors && f['firstName'].errors['required']">Name is required.</div>
+                            <div *ngIf="f['firstName'].errors?.['minlength']">
+                                Name must be at least 3 characters long.
+                            </div>
+                        </small>
+                    </div>
+                    
+                    <div class="field col-12 md:col-6">
+                        <label for="email">Email</label>
+            
+                        <input formControlName="email"  type="text" pInputText id="email" name="email"   [(ngModel)]="registation.email"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !registation.email}"/>
+                        
+                        <small class="ng-dirty ng-invalid text-danger" *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" >
+                            <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+                            <div *ngIf="f['email'].errors?.['email']">
+                                Invalid Email
+                            </div>
+                        </small>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="contactNo">Contact No</label>
+            
+                        <input formControlName="mobile"  type="text" pInputText id="mobile" name="mobile"   [(ngModel)]="registation.mobile"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !registation.mobile}"/>
+                        
+                        <small class="ng-dirty ng-invalid text-danger" *ngIf="f['mobile'].invalid && (f['mobile'].dirty || f['mobile'].touched)" >
+                            <div *ngIf="f['mobile'].errors && f['mobile'].errors['required']">Contact No is required.</div>
+                            
+                        </small>
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="contactNo">Date of Birth</label>
+                        <input formControlName="dob"  type="date" pInputText id="dob" name="dob"   [(ngModel)]="registation.dob"  />
+                        <small class="ng-dirty ng-invalid text-danger" *ngIf="f['dob'].invalid && (f['dob'].dirty || f['dob'].touched)" >
+                            <div *ngIf="f['dob'].errors && f['dob'].errors['required']">Date of Birth is required.</div>
+                        </small>
+                        <!-- <p-calendar   [(ngModel)]="registation.dob" formControlName="dob" ></p-calendar> -->
+
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="contactNo">Last University</label>
+                        <input formControlName="lastUniversity"  type="text" pInputText id="lastUniversity" name="lastUniversity"   [(ngModel)]="registation.lastUniversity" />
+                    </div>
+
+
+                    <div class="field col-12 md:col-6">
+                        <label for="contactNo">Present Address</label>
+                        <input formControlName="address"  type="text" pInputText id="address" name="address"   [(ngModel)]="registation.address" />
+                    </div>
+                    
+                </div>
+            </div>
+
+
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button [disabled]="!form.valid" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateUser()"></button>
+                </ng-template>
+            </p-dialog>
+
+            
+        </div>
+    </div>
+</div>

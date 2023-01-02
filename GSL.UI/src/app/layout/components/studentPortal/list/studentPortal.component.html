@@ -1,0 +1,111 @@
+<div class="card">
+    <div class="grid">
+        
+        <div class="col-12">
+            <p-toast></p-toast>
+            <div class="card px-0 py-0">
+                
+              
+                
+    
+                <p-table #dt [value]="users"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['fullName','email','contactNo']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                    <ng-template pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            
+                                <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm"  [routerLink]="['/register/addoredit/']"></button> -->
+                                <h5 class="m-0">Manage Registration</h5>
+                                <!-- <button pButton pRipple label="Agrement" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/studentAg/list/']"></button> -->
+                            
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                <!-- <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button> -->
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="no">No<p-sortIcon field="no"></p-sortIcon></th>
+                            <th pSortableColumn="fullName">Name<p-sortIcon field="fullName"></p-sortIcon></th>
+                            <th pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+                            <th pSortableColumn="contactNo">Contact No<p-sortIcon field="contactNo"></p-sortIcon></th>
+                            
+                            
+                            
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-register let-rowIndex="rowIndex">
+                        <tr>
+    
+                            <td style="width:25%; min-width:6rem;">
+                                <span class="p-column-title">No</span>
+                                <i class="pi pi-fw pi-chevron-right"></i>
+                                 {{rowIndex + 1}}
+                             </td>
+                          
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">fullName</span>
+                                {{register.fullName}}
+                            </td>
+    
+                           
+                            
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">email</span>
+                                {{register.email}}
+    
+                            </td>
+
+                            <td style="width:25%; min-width:10rem;">
+                                <span class="p-column-title">contactNo</span>
+                                {{register.contactNo}}
+    
+                            </td>
+
+                            <td>
+                                <div class="flex">
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" [routerLink]="['/student-portal/', register.id]"></button>
+                                </div>
+                            </td>
+                        </tr>
+    
+                    </ng-template>
+                </p-table>
+            </div>
+    
+         </div>
+    </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

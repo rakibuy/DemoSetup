@@ -1,0 +1,1066 @@
+<div class="flex flex-column md:flex-row gap-5" style="min-height: 91vh">
+    <p-toast></p-toast>
+    <div id="content"   class="w-30% border-1 surface-border surface-card border-round">
+            <div class="flex flex-column align-items-center border-bottom-1 surface-border p-4">
+                <img (click)="file.click()" src="http://192.168.191.60:1515/{{user.image}}"   class="w-6rem h-6rem border-circle shadow-4" alt=" Select  Image">
+                <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" multiple>
+                
+                
+                <span class="text-700 text-xl font-semibold mt-4">{{user.fullName}}</span>
+                <P>{{user.email}}</P>
+           </div>
+           <div class="w-full flex row-gap-4 flex-column surface-border p-4">
+           
+                <div class="flex flex-row gap-4 md:flex-column overflow-auto">
+            
+                    <div>
+                        <!-- <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple label="Message"  class="p-button-success mr-2 p-button-sm"></button> -->
+                       
+                
+                        <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple label="Email"  (click)="newEmail()" class="p-button-success mt-1 mr-2 p-button-sm"></button>
+                        <p-dialog [(visible)]="emailDialog" [maximizable]="true" [maximizable]="true" [style]="{width: '55vw'}" header="Email Details" [modal]="true" class="p-fluid">
+                            <ng-template pTemplate="content" >
+                
+                            <div class="col-12">
+                
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12">
+                                        <label for="passportNumber">Email</label>
+                                        <input  type="text" pInputText name="passportNumber" id="passportNumber"   [(ngModel)]="email.toEmail" />
+                                    </div>
+
+                                    <div class="field col-12">
+                                        <label for="placeOfIssue">Email Subject</label>
+                                        <input  type="text" pInputText name="placeOfIssue" id="placeOfIssue"  [(ngModel)]="email.subject" />
+                                    </div>
+
+                                    
+
+                                    <div class="field col-12">
+                                        <label for="Issue Date"  >Email Description</label>
+                                        <textarea [rows]="5" [cols]="60" [(ngModel)]="email.message"  pInputTextarea ></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                                
+                            </ng-template>
+                
+                            <ng-template pTemplate="footer">
+                                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognEmail()"></button>
+                                <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addEmail()"></button>
+                            </ng-template>
+                        </p-dialog>
+                    </div>
+
+                
+                    
+                </div>
+                  
+
+                  <table class="table table-primary">
+                    <tbody>
+                      <tr>
+                        <td>Total Payable: </td>
+                        <td class="text-danger text-capitalize fw-bold">{{amountDetials.totalPayable}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total Pay: </td>
+                        <td class="text-danger text-capitalize fw-bold">{{amountDetials.totalPay}}</td>
+                      </tr>
+                      <tr>
+                        <td>Remaining Pay: </td>
+                        <td class="text-danger text-capitalize fw-bold">{{amountDetials.remainingPay}}</td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td>Profile Info</td>
+                        <td class="text-danger text-capitalize fw-bold"><button type="button" (click)="profilePdfDwonload(user.id)"  class="btn btn-primary"> Download </button></td>
+                      </tr> -->
+                      <!-- <tr>
+                        <td>Profile PDF</td>
+                        <td class="text-danger text-capitalize fw-bold" ><button type="button" [routerLink]="['/student-portal/profile-pdf/', this.id]"   class="btn btn-primary"> Preview </button></td>
+                         <td class="text-danger text-capitalize fw-bold" ><button type="button" (click)="exportPDF()"   class="btn btn-primary"> new pdf </button></td>
+                      </tr> -->
+
+                     
+                    </tbody>
+                  </table>
+                  
+                 
+                  
+           </div>
+           
+
+    </div>
+    <div class="w-80% flex-1 border-1 surface-border surface-card border-round">
+        <div class="flex flex-column h-full">
+            <div class="flex align-items-center  pt-4 p-2 px-6">
+                <!-- <h1>Header</h1> -->
+            </div>
+            <div class=" md:px-1 lg:px-2   overflow-y-auto" style="max-height: 120vh;" #chatWindow [scrollTop]="chatWindow.scrollHeight">
+                <p-tabView [(activeIndex)]="activeIndex1">
+                    <!-- Basic info Start -->
+                        <p-tabPanel header="Basic Info">
+                            <div class="col-12">
+                                <div class="card">
+                                    <h5>Basic Information</h5>
+
+                                    <div class="p-fluid p-formgrid grid">
+                                        <!-- <div class="field col-12 md:col-4">
+                                            <label htmlFor="fullName">Name</label>
+                                            <input pInputText id="fullName" [(ngModel)]="user.fullName" type="text" />
+                                        </div>
+
+                                        <div class="field col-12 md:col-4"> 
+                                            <label htmlFor="email">Email</label>
+                                            <input pInputText id="email" [(ngModel)]="user.email" type="text" />
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label htmlFor="contactNo">Phone Number</label>
+                                            <input pInputText id="contactNo" [(ngModel)]="user.contactNo" type="text" />
+                                        </div> -->
+
+                                        <input  [(ngModel)]="pInfo.userId" value="{{this.id}}" type="hidden" />
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="firstName">Name</label>
+                                            <input pInputText id="firstName" readonly  value="{{user.fullName}}" type="text" />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="lastName">Email Address</label>
+                                            <input pInputText id="lastName"  readonly value="{{user.email}}" type="text" />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="lastName">Mobile</label>
+                                            <input pInputText id="lastName"  readonly value="{{registration.mobile}}" type="text" />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="birthDate">Birth Date</label>
+                                            <input pInputText id="birthDate" readonly [(ngModel)]="registration.dob" type="date" />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="fatherName">Father's Name</label>
+                                            <input pInputText id="fatherName" [(ngModel)]="pInfo.fatherName" type="text" />
+                                            <!-- <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !pInfo.fatherName">Father's Name is required.</small> -->
+                                        </div>
+
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="motherName">Mother's Name</label>
+                                            <input pInputText id="motherName" [(ngModel)]="pInfo.motherName" type="text" />
+                                            <!-- <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !pInfo.motherName">Mother's Name is required.</small> -->
+                                        </div>
+
+
+                                        
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="nid">NID</label>
+                                            <input pInputText id="nid" [(ngModel)]="pInfo.nid" type="text" />
+                                            <!-- <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !pInfo.nid">NID  is required.</small> -->
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="genderId">Gender</label>
+                                            <p-dropdown [options]="GenderList" [(ngModel)]="pInfo.genderId" optionValue="name" optionLabel="name"></p-dropdown>
+                                            <!-- <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !pInfo.genderId">Gender  is required.</small> -->
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="maritalStatusId">Marital Status</label>
+                                            <p-dropdown [options]="MaritalList" [(ngModel)]="pInfo.maritalStatusId" optionValue="name" optionLabel="name"></p-dropdown>
+                                        </div>
+
+                                        
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="medicalStatus">Medical Status</label>
+                                            <p-dropdown [options]="statusList" [(ngModel)]="pInfo.medicalStatus" optionValue="name" optionLabel="name"></p-dropdown>
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="policeClearenceStatus">Police Clearence Status</label>
+                                            
+                                            <p-dropdown [options]="statusList" [(ngModel)]="pInfo.policeClearenceStatus" optionValue="name" optionLabel="name"></p-dropdown>
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label htmlFor="nid">Funding Status</label>
+                                            <p-dropdown [options]="statusList" [(ngModel)]="pInfo.fundingStatus" optionValue="name" optionLabel="name"></p-dropdown>
+                                        </div>
+
+                                        
+
+                                        <div class="field col-12 md:col-10">
+                                            <!-- <label htmlFor="remark">Remark</label>
+                                            <input  pInputText id="remark" [(ngModel)]="pInfo.remark" type="text" /> -->
+                                            <span class="p-float-label">
+                                                <textarea id="remark"  [(ngModel)]="pInfo.remark" rows="3" cols="30" pInputTextarea></textarea>
+                                                <label for="float-input">Remark</label>
+                                            </span>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="field col-12 md:col-1">
+                                                    
+                                        <button *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" type="button" (click)="addOrUpdatePersonalInfo()" icon="pi pi-plus" class="btn px-4 py-2 btn-primary"> Save </button>
+                                        <!-- <button type="button" (click)="exportPDF()"  class="btn btn-primary"> Preview </button> -->
+                                    </div>
+                                </div> 
+                            </div>
+                        
+                        </p-tabPanel>
+                    <!-- Basic info End -->
+                    <!-- Qualification Start -->
+                        <p-tabPanel header="Qualification">
+                            <div class="col-12" >
+                                <div class="card px-0 py-0">
+                                    <p-table #dt [value]="qualifications"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['degreeName','subjectName','result','passingYear']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                                        <ng-template pTemplate="caption">
+                                            <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                                <h5 class="m-0">Manage Qualification</h5>
+                                                <button *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="newQualification()"></button>
+                                               
+                                                <!-- <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                    <i class="pi pi-search"></i>
+                                                    <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                                </span> -->
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>No </th>
+                                                <th >Degree Name </th>
+                                                <th >Subject Name</th>
+                                                <th >Result</th>
+                                                <th >Passing Year</th>
+                                                <th *ngIf="this.adminStafCouncilorAuthorizeHaveAccess">Action</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-qualification let-rowIndex="rowIndex">
+                                            <tr>
+                                                <td style="width:15%; min-width:6rem;">
+                                                    <span class="p-column-title">No</span>
+                                                    {{rowIndex + 1}}
+                                                </td>
+                                                
+                                            
+                                                <td style="width:30%; min-width:10rem;">
+                                                    <span class="p-column-title">degreeName</span>
+                                                    {{qualification.degreeName}}
+                                                </td>
+                        
+                                                <td style="width:20%; min-width:8rem;">
+                                                    <span class="p-column-title">subjectName</span>
+                                                    {{qualification.subjectName}}
+                        
+                                                </td>
+                                                <td style="width:20%; min-width:8rem;">
+                                                    <span class="p-column-title">result</span>
+                                                    {{qualification.result}}
+                        
+                                                </td>
+                                                <td style="width:20%; min-width:8rem;">
+                                                    <span class="p-column-title">passingYear</span>
+                                                    {{qualification.passingYear}}
+                        
+                                                </td>
+                        
+                                                <td>
+                                                    <div class="flex">
+                                                        <button *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editQualification(qualification)"></button>
+                                                        <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteDegree(degree)"></button> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                                        </ng-template>
+                                    </p-table> 
+                                </div>
+                        
+                                <p-dialog [(visible)]="qualificationDialog" [maximizable]="true" [style]="{width: '40vw'}" header="Qualification Details" [modal]="true" class="p-fluid">
+                                    <ng-template pTemplate="content" >
+                        
+                                        
+                                        <div class="field">
+                                            <label for="degreeName">Degree Name</label>
+                                            <!-- <input  type="text" pInputText name="degreeName" id="degreeName"  [(ngModel)]="qualification.degreeName" /> -->
+                                            <p-dropdown [options]="degerlist" [(ngModel)]="qualification.degreeName" optionLabel="name" placeholder="Select" optionValue="name"></p-dropdown>
+                                            
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !qualification.degreeName">Degree Name required.</small>
+                                        </div>
+
+                                        <div class="field">
+                                            <label for="subjectName">Subject Name</label>
+                                            <input  type="text" pInputText name="subjectName" id="subjectName"  [(ngModel)]="qualification.subjectName" />
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !qualification.subjectName">Subject is required.</small>
+                                        </div>
+
+                                        <div class="field">
+                                            <label for="result">Result</label>
+                                            <input  type="text" pInputText name="result" id="result"  [(ngModel)]="qualification.result" />
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !qualification.result">Result is required.</small>
+                                        </div>
+
+                                        <div class="field">
+                                            <label for="passingYear">Passing Year</label>
+                                            <input  type="text" pInputText name="passingYear" id="passingYear"  [(ngModel)]="qualification.passingYear" />
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !qualification.passingYear">Passing Year is required.</small>
+                                        </div>
+                                    
+                                        
+                                    </ng-template>
+                        
+                                    <ng-template pTemplate="footer">
+                                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognQualification()"></button>
+                                        <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateQualification()"></button>
+                                    </ng-template>
+                                </p-dialog>
+                        
+                            
+                            </div>
+                        </p-tabPanel>
+                    <!-- Qualification End -->
+
+                    <!-- Score Start -->
+                    <p-tabPanel header="Score">
+                        <div class="col-12" >
+                            <div class="card px-0 py-0">
+                                <p-table #dt [value]="scores"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['scoreName','overallScore','refusedCountry']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                                    <ng-template pTemplate="caption">
+                                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                            <h5 class="m-0">Manage Scores</h5>
+                                            <button *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="newScore()"></button>
+                                            
+                                            <!-- <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                            </span> -->
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>No </th>
+                                            <th >Score Name </th>
+                                            <th >Overall Score</th>
+                                            <!-- <th >Listening</th>
+                                            <th >Reading </th>
+                                            <th >Writing </th>
+                                            <th >Speaking </th> -->
+                                            <th >Refused Country </th>
+                                            <th *ngIf="this.adminStafCouncilorAuthorizeHaveAccess">Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-score let-rowIndex="rowIndex">
+                                        <tr>
+                                            <td style="width:10%; min-width:6rem;">
+                                                <span class="p-column-title">No</span>
+                                                {{rowIndex + 1}}
+                                            </td>
+                                            
+                                        
+                                            <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">scoreName</span>
+                                                {{score.scoreName}}
+                                            </td>
+                                            <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">overallScore</span>
+                                                {{score.overallScore}}
+                                            </td>
+                                            <!-- <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">Score Name</span>
+                                                {{score.listening}}
+                                            </td>
+                                            <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">Score Name</span>
+                                                {{score.reading}}
+                                            </td>
+                                            <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">Score Name</span>
+                                                {{score.writing}}
+                                            </td>
+                                            <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">Score Name</span>
+                                                {{score.speaking}}
+                                            </td> -->
+
+                                            <td style="width:15%; min-width:10rem;">
+                                                <span class="p-column-title">refusedCountry</span>
+                                                {{score.refusedCountry}}
+                                            </td>
+                                            <td>
+                                                <div class="flex">
+                                                    <button *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editScore(score)"></button>
+                                                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteDegree(degree)"></button> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                    
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                    
+                            <p-dialog [(visible)]="scoreDialog" [maximizable]="true" [style]="{width: '55vw'}" header="Score Details" [modal]="true" class="p-fluid">
+                                <ng-template pTemplate="content" >
+                    
+                                <div class="col-12">
+                    
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-6">
+                                            <label for="scoreName">Score Name</label>
+                                            <!-- <input  type="text" pInputText name="scoreName" id="scoreName"  [(ngModel)]="score.scoreName" /> -->
+                                            <p-dropdown [options]="scoreNames" placeholder="Select " [(ngModel)]="score.scoreName" optionLabel="name" optionValue="name"></p-dropdown>
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !score.scoreName">Score is required.</small>
+                                        </div>
+
+                                        <div class="field col-6">
+                                            <label for="overallScore">Overall Score</label>
+                                            <!-- <input  type="text" pInputText name="overallScore" id="overallScore"  [(ngModel)]="score.overallScore" /> -->
+                                            <p-inputNumber placeholder="0.0" [(ngModel)]="score.overallScore"  mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber>
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !score.overallScore">Overall Score is required.</small>
+                                        </div>
+
+                                        <div class="field col-4">
+                                            <label for="listening">Listening</label>
+                                            <!-- <input  type="text" pInputText name="listening" id="listening"  [(ngModel)]="score.listening" /> -->
+                                            <p-inputNumber  placeholder="0.0" [(ngModel)]="score.listening"  mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber>
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !score.listening">Listening is required.</small>
+                                        </div>
+
+                                        <div class="field col-4">
+                                            <label for="reading">Reading</label>
+                                            <!-- <input  type="text" pInputText name="reading" id="reading"  [(ngModel)]="score.reading" /> -->
+                                            <p-inputNumber  placeholder="0.0" [(ngModel)]="score.reading"  mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber>
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !score.reading">Reading is required.</small>
+                                        </div>
+
+                                        <div class="field col-4">
+                                            <label for="writing">Writing</label>
+                                            <!-- <input  type="text" pInputText name="writing" id="writing"  [(ngModel)]="score.writing" /> -->
+                                            <p-inputNumber  placeholder="0.0" [(ngModel)]="score.writing"  mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber>
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !score.writing">Writing is required.</small>
+                                        </div>
+
+                                        <div class="field col-6">
+                                            <label for="speaking">Speaking</label>
+                                            <!-- <input  type="text" pInputText name="speaking" id="speaking"  [(ngModel)]="score.speaking" /> -->
+                                            <p-inputNumber  placeholder="0.0" [(ngModel)]="score.speaking"  mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber>
+                                            <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !score.speaking">Speaking is required.</small>
+                                        </div>
+
+                                        <div class="field col-6">
+                                            <label for="refusedCountry">Refused Country</label>
+                                            <input  type="text" pInputText name="refusedCountry" id="refusedCountry"  [(ngModel)]="score.refusedCountry" />
+                                        </div>
+
+                                        
+
+                                    </div>
+                                </div>
+                                
+                                    
+                                </ng-template>
+                    
+                                <ng-template pTemplate="footer">
+                                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognScore()"></button>
+                                    <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateScore()"></button>
+                                </ng-template>
+                            </p-dialog>
+                    
+                        
+                        </div>
+                    </p-tabPanel>
+                <!-- Score End -->
+
+                <!-- Document  Start -->
+                <p-tabPanel header="Document">
+                    <div class="col-12" >
+                        <div class="card px-0 py-0">
+                            <p-table #dt [value]="documents" [columns]="cols" responsiveLayout="scroll" [rows]="3" [globalFilterFields]="['subCategoryTitle','documentCategoryTitle']" [rows]="3" [paginator]="true" [rowsPerPageOptions]="[3,6,9]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                                
+                                <ng-template pTemplate="caption">
+                                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                        <button *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="newDocument()"></button>
+                                        <h5 class="m-0">Manage Document</h5>
+                                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                        </span>
+                                    </div>
+                                </ng-template>
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>No </th>
+                                        <th >Document</th>
+                                        <th >Sub Title</th>
+                                        <th >Title</th>
+                                        <th >Action </th>
+
+                                        <!-- <th>Action</th> -->
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-document let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td style="width:10%; min-width:6rem;">
+                                            <span class="p-column-title">No</span>
+                                            {{rowIndex + 1}}
+                                        </td>
+                                        
+                                    
+                                        <td style="width:35%; min-width:10rem;">
+                                            <span class="p-column-title">url</span>
+                                            
+                                            <img src="http://192.168.191.60:1515/{{document.url}}"   class="w-6rem h-6rem " alt="File">
+                                        </td>
+                                        <td style="width:35%; min-width:10rem;">
+                                            <span class="p-column-title">subCategoryTitle</span>
+                                            {{document.subCategoryTitle}}
+                                        </td>
+
+                                        <td style="width:35%; min-width:10rem;">
+                                            <span class="p-column-title">documentCategoryTitle</span>
+                                            {{document.documentCategoryTitle}}
+                                        </td>
+
+                                        
+                                        
+                                        
+                                       
+                                        <td>
+                                            <div class="flex">
+                                                
+                                                <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editDocument(document)" ></button>
+                                                <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-success mr-2" (click)="downloadDocument(document.unicName)"></button>
+                                                <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple icon="pi pi-trash" class="p-button-rounded p-button-success mr-2" (click)="deleteDocument(document.id)"></button>
+                                                <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteDegree(degree)"></button> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                
+                                </ng-template>
+                            </p-table>
+                        </div>
+                
+                        <p-dialog [(visible)]="documentDialog" [maximizable]="true" [style]="{width: '55vw'}" header="Document File" [modal]="true" class="p-fluid p-100" [maximizable]="true" >
+                            
+
+                            <div class="col-12">
+                
+                                <div class="p-fluid p-formgrid grid"> 
+                                   
+
+                                    <div class="field col-12">
+                                        <label for="agreementDate">Document Sub Category</label>
+                                        <!-- <p-dropdown [options]="subCategories" [(ngModel)]="CategorySubId" [(ngModel)]="categoryId" optionValue="id" placeholder="Select" (onChange)="subCatagoryById($event)" optionLabel="name"></p-dropdown> -->
+                                        <select pInputText  [(ngModel)]="CategorySubId" [(ngModel)]="categoryId"  (change)="subCatagoryById($any($event.target).value)">
+                                    
+                                            <option  *ngFor="let state of subCategories"  value= {{state.id}}>{{state.name}}</option>
+                                        </select>
+                                        <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !CategorySubId">Category Subis required.</small>
+                                    </div>
+ 
+                                    <div class="field col-12">
+                                        <label for="agreementDate">Document Category</label>
+                                        <p-dropdown [options]="CategoriesBySubId" [(ngModel)]="CategoryId" placeholder="Select" optionValue="id" optionLabel="name"></p-dropdown>
+                                        
+                                        <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !CategoryId">Category is required.</small>
+                                    </div>
+
+
+                                    <div class="field col-12">
+                                        <label for="agreementDate">Document File</label>
+                                        <input  type="file"   (change)="onFileChange($event)" [(ngModel)]="catImg" pInputText  />
+                                        <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !catImg">File is required.</small>
+                                    </div>
+
+                                    <div class="field col-12" *ngIf="document.url">
+                                        <img src="http://192.168.191.60:1515/{{document.url}}"  class="w-15rem " alt="{{document.fileName}}">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <ng-template pTemplate="footer">
+                                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognDocument()"></button>
+                                <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="AddFile()" ></button>
+                            </ng-template>
+                
+                        </p-dialog>
+
+                        <!-- <p-dialog [(visible)]="deleteDocumentDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                            <div class="flex align-items-center justify-content-center">
+                                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                                <span *ngIf="document">Are you sure you want to delete <b></b>?</span>
+                            </div>
+                            <ng-template pTemplate="footer">
+                                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deleteDegreeDialog = false"></button>
+                                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+                            </ng-template>
+                        </p-dialog> -->
+                
+                    
+                    </div>
+                </p-tabPanel>
+                 <!-- Document  End -->
+
+                  <!-- Agreement Start -->
+                  <p-tabPanel header="Agreement">
+                    <div class="col-12" >
+                        <div class="card px-0 py-0">
+                            <p-table #dt [value]="agreements"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','degree.name','duration','duration.duration']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                        <h5 class="m-0">Manage Agreement</h5>
+                                        <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="newAgreement()"></button>
+                                        
+                                        <!-- <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                        </span> -->
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>No </th>
+                                        <th>Staff </th>
+                                        <th>Councilor </th>
+                                        <th >Agreement Date </th>
+                                        <th >Country</th>
+                                        <th >Gross Payble</th>
+                                        <th >remarks</th>
+                                        
+                                        <th *ngIf="this.adminStafCouncilorAuthorizeHaveAccess">Action</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agreement let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td style="width:10%; min-width:6rem;">
+                                            <span class="p-column-title">Id</span>
+                                            {{agreement.id}}
+                                        </td>
+                                      
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">stafName</span>
+                                            {{agreement.stafName}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">councilorName</span>
+                                            {{agreement.councilorName}}
+                                        </td>
+                                    
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">agreementDate</span>
+                                            {{agreement.agreementDate | date:'dd-MM-yyyy'}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">countryId</span>
+                                            {{agreement.countryId}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">grossPayable</span>
+                                            {{agreement.grossPayable}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">Score Name</span>
+                                            {{agreement.remarks}}
+                                        </td>
+
+                                        
+                                        <td>
+                                            <div class="flex">
+                                                <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editAgreement(agreement)"></button>
+                                                <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteDegree(degree)"></button> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                
+                                </ng-template>
+                            </p-table>
+                        </div>
+                
+                        <p-dialog [(visible)]="agreementDialog" [maximizable]="true" [style]="{width: '55vw'}" header="Agreement Details" [modal]="true" class="p-fluid">
+                            <ng-template pTemplate="content" >
+                
+                            <div class="col-12">
+                
+                                <div class="p-fluid p-formgrid grid">
+                                    <!-- <div class="field col-6">
+                                        <label for="stafList">Staf Name</label>
+                                        <p-dropdown [options]="stafList" [(ngModel)]="agreement.stafId" optionValue="id" optionLabel="fullName"></p-dropdown>
+                                    </div> -->
+                                    <div class="field col-12">
+                                        <label for="jobDetailsId">Job Details</label>
+                                        <p-dropdown [readonly]= jobDetailsChack [options]="councilorListByUserId" placeholder="Select" [(ngModel)]="agreement.jobDetailsId" optionValue="code" optionLabel="name"></p-dropdown>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !agreement.jobDetailsId">Councilor is required.</small>
+                                    </div>
+                                    <div class="field col-6">
+                                        <label for="agreementDate">Agreement Date</label>
+                                        <input  type="date" pInputText name="agreementDate" id="agreementDate"  [(ngModel)]="agreement.agreementDate" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !agreement.agreementDate">Agreement Date is required.</small>
+
+                                    </div>
+                              
+
+                                    <div class="field col-6">
+                                        <label for="countryId">Country</label>
+                                        <!-- <input  type="text" pInputText name="countryId" id="countryId"  [(ngModel)]="agreement.countryId" /> -->
+                                        <p-dropdown [options]="countries" placeholder="Select" [(ngModel)]="agreement.countryId" optionValue="name" optionLabel="name"></p-dropdown>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !agreement.countryId">Country is required.</small>
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="beforVisaCost">Before Visa Cost</label>
+                                        <input  type="number" placeholder="0.00"  pInputText name="beforVisaCost" id="countryId"  [(ngModel)]="agreement.beforVisaCost" (change)="totalCostCalculation()" />
+                                        <!-- <p-inputNumber placeholder="0.0"  [(ngModel)]="agreement.beforVisaCost" (change)="totalCostCalculation()" mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"></p-inputNumber> -->
+                                        
+                                        
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="registrationFees">Registration Fees</label>
+                                        <input  type="number" pInputText name="registrationFees" id="registrationFees"  [(ngModel)]="agreement.registrationFees" (change)="totalCostCalculation()" />
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="universityApplicationFees">University Application Fees</label>
+                                        <input  type="number" pInputText name="universityApplicationFees" id="universityApplicationFees"  [(ngModel)]="agreement.universityApplicationFees" (change)="totalCostCalculation()"  />
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="afterVisaServiceCharge">After Visa Service Charge</label>
+                                        <input  type="number" pInputText name="afterVisaServiceCharge" id="afterVisaServiceCharge"  [(ngModel)]="agreement.afterVisaServiceCharge" (change)="totalCostCalculation()" />
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="grossPayable">Gross Payable</label>
+                                        <input  readonly type="text" pInputText name="grossPayable" id="grossPayable"  [(ngModel)]="agreement.grossPayable" />
+                                    </div>
+
+                                    
+
+                                    <div class="field col-6">
+                                        <label for="remarks">Remarks</label>
+                                        <input  type="text" pInputText name="remarks" id="remarks"   [(ngModel)]="agreement.remarks" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                
+                            </ng-template>
+                
+                            <ng-template pTemplate="footer">
+                                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognAgreement()"></button>
+                                <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateAgreement()"></button>
+                            </ng-template>
+                        </p-dialog>
+                
+                    
+                    </div>
+                  </p-tabPanel>
+                <!-- Agreement End -->
+
+                 <!-- Passport Details Start -->
+                 <p-tabPanel header="Passport Details">
+                    <div class="col-12" >
+                        <div class="card px-0 py-0">
+                            <p-table #dt [value]="passports"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','degree.name','duration','duration.duration']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                        <h5 class="m-0">Manage Passport</h5>
+                                        <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="newPassport()"></button>
+                                        
+                                        <!-- <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                        </span> -->
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>No </th>
+                                        <th >Passport Number </th>
+                                        <th >Place Of Issue</th>
+                                        <th >Issue Date</th>
+                                        <th >Expire Date </th>
+                                        <th >Remarks </th>
+                                        <th *ngIf="this.adminStafCouncilorAuthorizeHaveAccess">Action</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-passport let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td style="width:10%; min-width:6rem;">
+                                            <span class="p-column-title">No</span>
+                                            {{rowIndex + 1}}
+                                        </td>
+                                        
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">Score Name</span>
+                                            {{passport.passportNumber}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">Score Name</span>
+                                            {{passport.placeOfIssue}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">Score Name</span>
+                                            {{passport.issueDate | date:'dd-MM-yyyy'}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">Score Name</span>
+                                            {{passport.expireDate | date:'dd-MM-yyyy'}}
+                                        </td>
+                                       
+                                        
+                                        
+                                       
+                                        
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            <span class="p-column-title">Score Name</span>
+                                            {{passport.remarks}}
+                                        </td>
+
+                                        
+                                        <td>
+                                            <div class="flex">
+                                                <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editPassport(passport)"></button>
+                                                <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteDegree(degree)"></button> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                
+                                </ng-template>
+                            </p-table>
+                        </div>
+                
+                        <p-dialog [(visible)]="passportDialog" [maximizable]="true" [style]="{width: '55vw'}" header="Passport Details" [modal]="true" class="p-fluid">
+                            <ng-template pTemplate="content" >
+                
+                            <div class="col-12">
+                
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-6">
+                                        <label for="passportNumber">Passport Number</label>
+                                        <input  type="text" pInputText name="passportNumber" id="passportNumber"  [(ngModel)]="passport.passportNumber" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !passport.passportNumber">Passport Number is required.</small>
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="placeOfIssue">Place Of Issue</label>
+                                        <input  type="text" pInputText name="placeOfIssue" id="placeOfIssue"  [(ngModel)]="passport.placeOfIssue" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !passport.placeOfIssue">Place Of Issue is required.</small>
+                                    </div>
+
+                                    
+
+                                    <div class="field col-6">
+                                        <label for="Issue Date">Issue Date</label>
+                                        <input  type="date" pInputText name="issueDate" id="issueDate"  [(ngModel)]="passport.issueDate" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !passport.issueDate">Issue Date  is required.</small>
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="expireDate">Expire Date</label>
+                                        <input  type="date" pInputText name="expireDate" id="expireDate"  [(ngModel)]="passport.expireDate" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !passport.expireDate">Expire Date is required.</small>
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="remarks">Remarks</label>
+                                        <input  type="text" pInputText name="remarks" id="remarks"  [(ngModel)]="passport.remarks" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognPassport()"></button>
+                                <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdatePassport()"></button>
+                            </ng-template>
+                        </p-dialog>
+                
+                    
+                    </div>
+                 </p-tabPanel>
+                <!-- Agreement End -->
+
+                  <!-- Apply Start -->
+                    <p-tabPanel header="Apply">
+                    <div class="col-12" >
+                        <div class="card px-0 py-0">
+                            <p-table #dt [value]="applys"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','degree.name','duration','duration.duration']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                        <h5 class="m-0">Manage Applys</h5>
+                                        <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" (click)="newApply()"></button>
+                                        
+                                        <!-- <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                                        </span> -->
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>No </th>
+                                        <th >Issue Date </th>
+                                        <th >Apply Date</th>
+                                        <th >Follow Up Date</th>
+                                        <th >University</th>
+                                        <th >Subject</th>
+                                        <th >Remarks </th>
+                                        <th >Status </th>
+                                        <th *ngIf="this.adminStafCouncilorAuthorizeHaveAccess">Action</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-apply let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td style="width:10%; min-width:4rem;">
+                                            {{rowIndex + 1}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:7rem;">
+                                            {{apply.issuDate | date:"dd-mm-yy"}}
+                                        </td>
+                                        <td style="width:15%; min-width:8rem;">
+                                            {{apply.applyDate | date:"dd-mm-yy"}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:8rem;">
+                                            {{apply.followUpDate | date:"dd-mm-yy"}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:10rem;">
+                                            {{apply.universityName}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:8rem;">
+                                            {{apply.subjectName}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:8rem;">
+                                            {{apply.remarks}}
+                                        </td>
+
+                                        <td style="width:15%; min-width:8rem;">
+                                            {{apply.status}}
+                                        </td>
+                                        
+                                        <td>
+                                            <div class="flex">
+                                                <button pButton *ngIf="this.adminStafCouncilorAuthorizeHaveAccess" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editApply(apply)"></button>
+                                                <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteDegree(degree)"></button> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                
+                                </ng-template>
+                            </p-table>
+                        </div>
+                
+                        <p-dialog [(visible)]="applyDialog" [maximizable]="true" [autoZIndex]="true"   [style]="{width: '55vw'}" header="Apply Details" [modal]="true" class="p-fluid">
+                            <ng-template  pTemplate="content" >
+                
+                            <div class="col-12">
+
+                                
+                
+                                <div class="p-fluid p-formgrid grid">
+
+                                    <div class="field col-6">
+                                        <label for="countryId">Apply By Agreement </label>
+                                        <p-dropdown placeholder="Select" [options]="agreementListByUserId"  [(ngModel)]="apply.agreementId" optionLabel="name" optionValue="code"></p-dropdown>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.agreementId">Agreement is required</small>
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="countryId">University Name </label>
+                                        <p-dropdown placeholder="Select" [options]="univeristyList"  [(ngModel)]="apply.universityId" optionLabel="name" optionValue="id"></p-dropdown>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.universityId">University is required</small>
+                                    </div>
+    
+                                    <div class="field col-6">
+                                        <label for="subjectId">Subject</label>
+                                        <p-dropdown placeholder="Select" [options]="subjects" [(ngModel)]="apply.subjectId" optionLabel="name" optionValue="id"></p-dropdown>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.subjectId">Subject is required.</small>
+                                        
+                                    </div>
+                                    <div class="field col-6">
+                                        <label for="issuDate">Issue Date</label>
+                                        <input  type="date"  pInputText name="applyDate" id="applyDate"  [(ngModel)]="apply.issuDate"/>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.issuDate">Issue Date is required.</small>
+                                        
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="applyDate"> Apply Date</label>
+                                        <input  type="date"  name="applyDate" id="applyDate" pInputText  [(ngModel)]="apply.applyDate" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.applyDate">Apply Date is required.</small>
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="subjectId">Status</label>
+                                        <p-dropdown  [options]="statusList" placeholder="Select"  [(ngModel)]="apply.status" optionLabel="name" optionValue="name"></p-dropdown>
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.agreementId">Place Of Issue is required.</small>
+                                        
+                                    </div>
+
+                                    <div class="field col-6">
+                                        <label for="followUpDate">Follow Up Date</label>
+                                        <input  type="date" pInputText name="followUpDate" id="followUpDate"   [(ngModel)]="apply.followUpDate" />
+                                        <small class="ng-dirty text-danger ng-invalid" *ngIf="submitted && !apply.followUpDate">Follow Up Date is required.</small>
+                                    </div>
+
+                                  
+
+                                    <div class="field col-6">
+                                        <label for="remarks">Remarks</label>
+                                        <input  type="text" pInputText name="remarks" id="remarks"  [(ngModel)]="apply.remarks" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                                
+                            </ng-template>
+                
+                            <ng-template pTemplate="footer">
+                                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialognApply()"></button>
+                                <button  pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateApply()"></button>
+                            </ng-template>
+                        </p-dialog>
+                
+                    
+                    </div>
+                    </p-tabPanel>
+                  <!-- Apply end -->
+                    
+                   
+                </p-tabView>
+
+               
+            </div>
+            <!-- <div class="p-3 md:p-4 lg:p-6 flex flex-column sm:flex-row align-items-center mt-auto border-top-1 surface-border gap-3">
+               <h1>Body Footer</h1>
+            </div> -->
+           </div>
+    </div>
+</div>

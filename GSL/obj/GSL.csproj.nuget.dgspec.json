@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Practis\\GSL\\GSL\\GSL.csproj": {}
+    "F:\\projectFinal\\DemoSetup\\GSL\\GSL.csproj": {}
   },
   "projects": {
-    "E:\\Practis\\GSL\\GSL.CommonRepo\\GSL.CommonRepo.csproj": {
+    "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\GSL.CommonRepo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Practis\\GSL\\GSL.CommonRepo\\GSL.CommonRepo.csproj",
+        "projectUniqueName": "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\GSL.CommonRepo.csproj",
         "projectName": "GSL.CommonRepo",
-        "projectPath": "E:\\Practis\\GSL\\GSL.CommonRepo\\GSL.CommonRepo.csproj",
-        "packagesPath": "C:\\Users\\uy007\\.nuget\\packages\\",
-        "outputPath": "E:\\Practis\\GSL\\GSL.CommonRepo\\obj\\",
+        "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\GSL.CommonRepo.csproj",
+        "packagesPath": "C:\\Users\\Rakib\\.nuget\\packages\\",
+        "outputPath": "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\uy007\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rakib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj": {
-                "projectPath": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj"
+              "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj": {
+                "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj"
               }
             }
           }
@@ -55,8 +55,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -68,21 +67,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj": {
+    "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj",
+        "projectUniqueName": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj",
         "projectName": "GSL.DataContext",
-        "projectPath": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj",
-        "packagesPath": "C:\\Users\\uy007\\.nuget\\packages\\",
-        "outputPath": "E:\\Practis\\GSL\\GSL.DataContext\\obj\\",
+        "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj",
+        "packagesPath": "C:\\Users\\Rakib\\.nuget\\packages\\",
+        "outputPath": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\uy007\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rakib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -129,8 +128,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -142,21 +140,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Practis\\GSL\\GSL.Service\\GSL.Service.csproj": {
+    "F:\\projectFinal\\DemoSetup\\GSL.Service\\GSL.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Practis\\GSL\\GSL.Service\\GSL.Service.csproj",
+        "projectUniqueName": "F:\\projectFinal\\DemoSetup\\GSL.Service\\GSL.Service.csproj",
         "projectName": "GSL.Service",
-        "projectPath": "E:\\Practis\\GSL\\GSL.Service\\GSL.Service.csproj",
-        "packagesPath": "C:\\Users\\uy007\\.nuget\\packages\\",
-        "outputPath": "E:\\Practis\\GSL\\GSL.Service\\obj\\",
+        "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.Service\\GSL.Service.csproj",
+        "packagesPath": "C:\\Users\\Rakib\\.nuget\\packages\\",
+        "outputPath": "F:\\projectFinal\\DemoSetup\\GSL.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\uy007\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rakib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -170,11 +168,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Practis\\GSL\\GSL.CommonRepo\\GSL.CommonRepo.csproj": {
-                "projectPath": "E:\\Practis\\GSL\\GSL.CommonRepo\\GSL.CommonRepo.csproj"
+              "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\GSL.CommonRepo.csproj": {
+                "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.CommonRepo\\GSL.CommonRepo.csproj"
               },
-              "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj": {
-                "projectPath": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj"
+              "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj": {
+                "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj"
               }
             }
           }
@@ -194,8 +192,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -207,21 +204,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Practis\\GSL\\GSL\\GSL.csproj": {
+    "F:\\projectFinal\\DemoSetup\\GSL\\GSL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Practis\\GSL\\GSL\\GSL.csproj",
+        "projectUniqueName": "F:\\projectFinal\\DemoSetup\\GSL\\GSL.csproj",
         "projectName": "GSL",
-        "projectPath": "E:\\Practis\\GSL\\GSL\\GSL.csproj",
-        "packagesPath": "C:\\Users\\uy007\\.nuget\\packages\\",
-        "outputPath": "E:\\Practis\\GSL\\GSL\\obj\\",
+        "projectPath": "F:\\projectFinal\\DemoSetup\\GSL\\GSL.csproj",
+        "packagesPath": "C:\\Users\\Rakib\\.nuget\\packages\\",
+        "outputPath": "F:\\projectFinal\\DemoSetup\\GSL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\uy007\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rakib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -235,11 +232,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj": {
-                "projectPath": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj"
+              "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj": {
+                "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj"
               },
-              "E:\\Practis\\GSL\\GSL.Service\\GSL.Service.csproj": {
-                "projectPath": "E:\\Practis\\GSL\\GSL.Service\\GSL.Service.csproj"
+              "F:\\projectFinal\\DemoSetup\\GSL.Service\\GSL.Service.csproj": {
+                "projectPath": "F:\\projectFinal\\DemoSetup\\GSL.Service\\GSL.Service.csproj"
               }
             }
           }
@@ -301,8 +298,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -314,7 +310,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

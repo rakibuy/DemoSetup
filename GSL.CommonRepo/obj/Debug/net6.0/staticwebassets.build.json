@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "d2AE+iAeuDYWJWtpknIqIhD7J83eoien6aJy8Hh/0lY=",
+  "Hash": "dm097UL/8j76ouNH7poll8aJX+jf1aGZWeYjmvfMK68=",
   "Source": "GSL.CommonRepo",
   "BasePath": "_content/GSL.CommonRepo",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "E:\\Practis\\GSL\\GSL.DataContext\\GSL.DataContext.csproj",
+      "Identity": "F:\\projectFinal\\DemoSetup\\GSL.DataContext\\GSL.DataContext.csproj",
       "Version": 2,
       "Source": "GSL.DataContext",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

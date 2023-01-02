@@ -1,0 +1,191 @@
+<div class="card">
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-0 py-0">
+            <p-toast></p-toast>
+            <!-- <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+
+                    </div>
+                </ng-template>
+            </p-toolbar> -->
+
+            <p-table #dt [value]="agreements"  [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['registrationName','agreement.registrationName','agreementDate','agreement.agreementDate', 'countryId','agreement.countryId', 'representative.name','status']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2v p-button-sm" (click)="openNew()"></button>
+                        <h5 class="m-0">Manage Agreement</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                       
+                        <th pSortableColumn="no">No<p-sortIcon field="no"></p-sortIcon></th>
+                        <th pSortableColumn="registrationId">Student Name<p-sortIcon field="registrationId"></p-sortIcon></th>
+                        <th pSortableColumn="agreementDate">Agreement Date<p-sortIcon field="agreementDate"></p-sortIcon></th>
+                        <!-- <th pSortableColumn="countryId">Country<p-sortIcon field="countryId"></p-sortIcon></th> -->
+                        <th pSortableColumn="beforVisaCost">Befor Visa Cost <p-sortIcon field="beforVisaCost"></p-sortIcon></th>
+                        <th pSortableColumn="registrationFees">Registration Fees<p-sortIcon field="registrationFees"></p-sortIcon></th>
+                        <th pSortableColumn="universityApplicationFees">Application Fees<p-sortIcon field="universityApplicationFees"></p-sortIcon></th>
+                        <th pSortableColumn="afterVisaServiceCharge">After Service Charge<p-sortIcon field="afterVisaServiceCharge"></p-sortIcon></th>
+                        <th pSortableColumn="remarks">Remarks<p-sortIcon field="remarks"></p-sortIcon></th>
+                        <th pSortableColumn="agreementDescription">Description<p-sortIcon field="agreementDescription"></p-sortIcon></th>
+                       
+                        
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-agreement let-rowIndex="rowIndex">
+                    <tr>
+                       
+                        <td style="width:15%; min-width:6rem;">
+                            <span class="p-column-title">no</span>
+                            <i class="pi pi-fw pi-chevron-right"></i>
+                            {{rowIndex + 1}}
+
+                        </td>
+
+                        <td style="width:15%; min-width:12rem;">
+                            <span class="p-column-title">registrationId</span>
+                            {{agreement.registrationName}}
+
+                        </td>
+                        <td style="width:15%; min-width:12rem;">
+                            <span class="p-column-title">agreementDate</span>
+                            {{agreement.agreementDate | date:"dd-MM-YYYY"}}
+
+                        </td>
+                        
+
+                        <!-- <td style="width:15%; min-width:8rem;">
+                            <span class="p-column-title">countryId</span>
+                            {{agreement.countryId}}
+
+                        </td> -->
+                        <td style="width:15%; min-width:12rem;">
+                            <span class="p-column-title">beforVisaCost</span>
+                            {{ agreement.beforVisaCost | currency:'BDT ' }}
+                        </td>
+
+                        <td style="width:15%; min-width:12rem;">
+                            <span class="p-column-title">registrationFees</span>
+                            {{agreement.registrationFees | currency:'BDT '}}
+
+                        </td>
+                        <td style="width:15%; min-width:12rem;">
+                            <span class="p-column-title">universityApplicationFees</span>
+                            {{agreement.universityApplicationFees | currency:'BDT '}}
+                        </td>
+
+                        <td style="width:15%; min-width:14rem;">
+                            <span class="p-column-title">afterVisaServiceCharge</span>
+                            {{agreement.afterVisaServiceCharge | currency:'BDT '}}
+                        </td>
+
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">remarks</span>
+                            {{agreement.remarks}}
+                        </td>
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">agreementDescription</span>
+                            {{ agreement.agreementDescription }}
+                        </td>
+
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editAgreement(agreement)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteAgreement(agreement)"></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="agreementDialog" [style]="{width: '750px'}" header="Agreement Details" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+
+                <div class="col-12">
+                    
+                        <div class="p-fluid p-formgrid grid">
+
+                            <div class="field col-6">
+                                <label htmlFor="registrationId"> Studen Name <span class="text-danger">*</span></label>
+                                <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="studenregistation" [(ngModel)]="agreement.registrationId" optionValue="id" optionLabel="firstName" class="ng-dirty" placeholder="Select" [ngClass]="{'ng-invalid ng-dirty' : submitted && !agreement.registrationId}"></p-dropdown>
+                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.registrationId">Name is required.</small>
+                            </div>
+                           
+                            <div class="field col-6">
+                                <label htmlFor="agreementDescription">Agreement Date <span class="text-danger">*</span></label>
+                                <input pInputText type="date" name="agreementDate"   [(ngModel)]="agreement.agreementDate"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !agreement.agreementDate}"/>
+                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.agreementDate">Agreement Date is required.</small>
+                            </div>
+                            <!-- <div class="field col-6">
+                                <label htmlFor="countryId">Country Define <span class="text-danger">*</span></label>
+                                <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="countries" [(ngModel)]="agreement.countryId" optionValue="name" optionLabel="name" class="ng-dirty" placeholder="Select"></p-dropdown>
+                                <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.countryId">Country is required.</small>
+                            </div> -->
+                           
+                            
+                            <div class="field col-4">
+                                <label htmlFor="beforVisaCost">Befor Visa Cost</label>
+                                <p-inputNumber placeholder="0.00 ৳ " [(ngModel)]="agreement.beforVisaCost" inputId="beforVisaCost" mode="currency" currency="BDT" locale="en-BD" [ngClass]="{'ng-invalid ng-dirty' : submitted && !agreement.beforVisaCost}"></p-inputNumber>
+                                
+                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.beforVisaCost">Before Visa Cost is required.</small> -->
+                            </div>
+                            
+                            <div class="field col-4">
+                                <label htmlFor="registrationFees">Registration Fees </label>
+                                <p-inputNumber placeholder="0.00 ৳" [(ngModel)]="agreement.registrationFees" inputId="registrationFees" mode="currency" currency="BDT" locale="en-US" [ngClass]="{'ng-invalid ng-dirty' : submitted && !agreement.registrationFees}"></p-inputNumber>
+                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.registrationFees">Registration Free is required.</small> -->
+                            </div>
+                            <div class="field col-12 md:col-4">
+                                <label htmlFor="universityApplicationFees">University Application Fees </label>
+                                <p-inputNumber placeholder="0.00 ৳" [(ngModel)]="agreement.universityApplicationFees" inputId="universityApplicationFees" mode="currency" currency="BDT" locale="en-BD" [ngClass]="{'ng-invalid ng-dirty' : submitted && !agreement.universityApplicationFees}"></p-inputNumber>
+                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.universityApplicationFees">University Application Fees is required.</small>  -->
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label htmlFor="afterVisaServiceCharge">After Visa Service Charge </label>
+                                <p-inputNumber placeholder="0.00 ৳" [(ngModel)]="agreement.afterVisaServiceCharge" inputId="afterVisaServiceCharge" mode="currency" currency="BDT" locale="en-BD" [ngClass]="{'ng-invalid ng-dirty' : submitted && !agreement.afterVisaServiceCharge}"></p-inputNumber>
+                                <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="submitted && !agreement.afterVisaServiceCharge">After Visa Service Charge is required.</small> -->
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label htmlFor="remarks">Remarks</label>
+                                <input pInputText id="remarks" type="text" name="remarks"   [(ngModel)]="agreement.remarks" />
+                            </div>
+                            <div class="field col-12">
+                                <label htmlFor="agreementDescription">Agreement Description</label>
+                                
+                                <textarea [(ngModel)]="agreement.agreementDescription" rows="5" cols="30" placeholder="Your Message" pInputTextarea name="agreementDescription"></textarea>
+                            </div>
+                        </div>
+                    
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addOrUpdateAgreement()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteAgreementDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="agreement">Are you sure you want to delete <b>{{agreement.remarks}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"  (click)="deleteAgreementDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>
+</div>

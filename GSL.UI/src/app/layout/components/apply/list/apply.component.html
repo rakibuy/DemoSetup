@@ -1,0 +1,82 @@
+<div class="card">
+
+    <div class="grid">
+        <div class="col-12">
+            <div class="card px-0 py-0">
+                
+                <p-table #dt [value]="applys"   [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['registrationName','apply.registrationName','staffId','apply.staffId','issueDate', 'apply.issueDate']"  [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                    <!-- <ng-template pTemplate="left">
+                        <div>
+                            <button pButton styleClass="p-button-sm" pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/apply/addoredit']"></button>
+                           
+    
+                        </div>
+                    </ng-template> -->
+                    
+                    <ng-template  pTemplate="caption">
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                          
+                                <button pButton styleClass="p-button-sm" pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/apply/addoredit']"></button>
+                                <!-- <button pButton pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/register/list/']"></button> -->
+                                <h5 class="m-0">Apply Panel</h5>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="no"> No <p-sortIcon field="no"></p-sortIcon></th>
+                            <th pSortableColumn="registrationName">Student Name <p-sortIcon field="registrationName"></p-sortIcon></th>
+                            <th pSortableColumn="issueDate">Issue Date <p-sortIcon field="issueDate"></p-sortIcon></th>
+                            <th pSortableColumn="applyDate">Apply Date<p-sortIcon field="applyDate"></p-sortIcon></th>
+                            <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
+                            
+                            
+                            <th >Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template class="p-0" pTemplate="body" let-apply  let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="p-2" style="width:10%; min-width:6rem;">
+                                <span class="p-column-title">No</span>
+                                <i class="pi pi-fw pi-chevron-right"></i>
+                                 {{rowIndex + 1}}
+                             </td>
+                             <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">registrationName</span>
+                                {{apply.registrationName}}
+    
+                            </td>
+
+                            
+                            <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">issueDate</span>
+                                {{ apply.issueDate | date:'dd-MM-yyyy' }}
+                            </td>
+    
+                            <td class="p-2" style="width:20%; min-width:12rem;">
+                                <span class="p-column-title">applyDate</span>
+                                {{apply.applyDate | date:'dd-MM-yyyy'}}
+    
+                            </td>
+
+                            <td><span [class]="'product-badge status-' + apply.status.toLowerCase()">{{apply.status}}</span></td>
+                            
+
+                            <td>
+                                <div class="flex">
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" [routerLink]="['/apply/', apply.id]"></button>
+                                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteInformation(information)"></button> -->
+                                </div>
+                            </td>
+                        </tr>
+    
+                    </ng-template>
+                </p-table>
+            </div>
+  
+        </div>
+    </div>
+</div>

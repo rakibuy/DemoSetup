@@ -4,23 +4,14 @@ namespace GSL.VModel
 {
     public class UserVM
     {
-        public int Id { get; set; }
-
-        //User jwt Authentication start
-
-        //public int UserId { get; set; }
-
+        public long Id { get; set; }
         public Role Role { get; set; } = Role.User;
+        public string UserName { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string Number { get; set; } = null!;
 
-        //User jwt Authentication start
+        public string? Password { get; set; }
 
-        public string? FullName { get; set; } = null!;
-        public string? Password { get; set; } = null!;
-        public string? Email { get; set; }
-        public string? ContactNo { get; set; }
-        public string? Remark { get; set; }
-        public string? Image { get; set; }
-        public bool JobAssignStatus { get; set; }
     }
 
 

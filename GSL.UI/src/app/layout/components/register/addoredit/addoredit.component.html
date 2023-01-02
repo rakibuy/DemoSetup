@@ -1,0 +1,335 @@
+<form [formGroup]="productform">
+<div >
+
+<div class="col-12">
+    <p-toast></p-toast>
+<div class="card" >
+    <div >
+    <button pButton styleClass="p-button-sm" pRipple label="Back" icon="pi pi-plus" class="p-button-success mr-2 p-button-sm" [routerLink]="['/register/list']"></button>
+    <p-tabView>
+        <p-tabPanel header="Basic Info">
+           
+            <div class="card">
+                <h5>Basic Information</h5>
+                <div class="formgrid grid">
+                    <input id="id"   type="hidden" formControlName="id" >
+                    <div class="field col-12 md:col-6">
+                        <label for="firstName">Name <span class="text-danger">*</span> </label>
+                        <input id="firstName" [ngModel]="register.firstName" type="text" formControlName="firstName" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched) " >
+                            <div *ngIf="f['firstName'].errors && f['firstName'].errors['required']">Name is required.</div>
+                        </small> -->
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="dob">Date of Birth <span class="text-danger">*</span></label>
+                        <input id="dob" type="date" [ngModel]="register.dob" formControlName="dob" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="f['dob'].invalid && (f['dob'].dirty || f['dob'].touched) " >
+                            <div *ngIf="f['dob'].errors && f['dob'].errors['required']">Date of Birth is required.</div>
+                        </small> -->
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="mobile">Mobile No <span class="text-danger">*</span></label>
+                        <input id="mobile" type="text" [ngModel]="register.mobile" formControlName="mobile" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <small class="ng-dirty ng-invalid text-danger" *ngIf="f['mobile'].invalid && (f['mobile'].dirty || f['mobile'].touched) " >
+                            <!-- <div *ngIf="f['mobile'].errors && f['mobile'].errors['required']">Mobile No is required.</div> -->
+                            <div *ngIf="f['mobile'].errors && f['mobile'].errors['pattern']">Invalid Mobile No</div>
+                        </small>
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="email">E-mail ID <span class="text-danger">*</span></label>
+                        <input id="email" type="text" [ngModel]="register.email" formControlName="email" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <small class="ng-dirty ng-invalid text-danger" *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched) " >
+                            <!-- <div *ngIf="f['email'].errors && f['email'].errors['required']">E-mail ID is required.</div> -->
+                            <div *ngIf="f['email'].errors && f['email'].errors['email']">Invalid E-mail</div>
+                        </small>
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="preferenceCountryId" >Preference Country </label>
+
+                        <select class="form-select" name="preferenceCountryId" lass="form-select form-control"  [ngModel]="register.preferenceCountryId" type="text" formControlName="preferenceCountryId" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                            <option selected> Select </option>
+                            <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
+                        </select>
+                       
+                        <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="f['preferenceCountryId'].invalid && (f['preferenceCountryId'].dirty || f['preferenceCountryId'].touched) " >
+                            <div *ngIf="f['preferenceCountryId'].errors && f['preferenceCountryId'].errors['required']">Preference Country is required.</div>
+                        </small> -->
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="lastUniversity">Last University</label>
+                        <input id="lastUniversity" type="text" [ngModel]="register.lastUniversity" formControlName="lastUniversity" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <!-- <small class="ng-dirty ng-invalid text-danger" *ngIf="f['lastUniversity'].invalid && (f['lastUniversity'].dirty || f['lastUniversity'].touched) " >
+                            <div *ngIf="f['lastUniversity'].errors && f['lastUniversity'].errors['required']">Last University is required.</div>
+                        </small> -->
+                    </div>
+                    
+                </div>
+            </div>
+            
+           
+        </p-tabPanel>
+        <p-tabPanel header="Qualification">
+                        
+                <div class="card">
+                    <h5>Qualification</h5>
+                    <div class="col-12">
+                        <ng-container>
+                            <div class="grid formgrid">
+                                
+                                <div class="field col-3">
+                                    <label class="ml-2">Name of Degree <span class="text-danger">*</span> </label>
+                                </div>
+                                <div class="field col-3">
+                                    <label class="ml-2">Subject <span class="text-danger">*</span></label>
+                                </div>
+                
+                                <div class="field col-2">
+                                    <label class="ml-2">Result <span class="text-danger">*</span></label>
+                                </div>
+                
+                                <div class="field col-3">
+                                    <label class="ml-2">Passing Year <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <!-- Start Items -->
+                        <ng-container formArrayName="academicQualifications" >
+                    <ng-container *ngFor="let itemGroup of academicQualifications.controls; let i = index; let lst= last; let fst=first;" [formGroupName]="i">
+                        <div class="grid formgrid">
+                            <!-- [formGroup]="convertToGroup(itemGroup)" -->
+
+                            
+                            <input type="hidden" aria-label="First name" class="form-control" formControlName="id">
+                            <input type="hidden" aria-label="First name" class="form-control" formControlName="registrationId">
+                            <div class="field col-3" >
+                                <select formControlName="degreeName" class="form-select" aria-label="Select">
+                                    <option selected>Select</option>
+                                    <option>SSC/O Level</option>
+                                    <option>HSC / A Level / Diploma</option>
+                                    <option>Bachelor(BBA/BSC)</option>
+                                    <option>Master's(MBA/MSC)</option>
+                                    <option>Others's</option>
+                                </select>
+                                <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                    <div *ngIf="submitted && itemGroup.get('degreeName')?.hasError('required')">
+                                        Degree  Name is required
+                                    </div>
+                                    
+                                </small> -->
+                            </div>
+                            <div class="field col-3">
+                               
+                               
+
+                                <select formControlName="subjectName" class="form-select form-control">
+                                    <option selected> Select </option>
+                                    <option *ngFor="let item of subjectData" [value]="item.id">{{item.name}}</option>
+                                </select>
+                                <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                    <div *ngIf="submitted && itemGroup.get('subjectName')?.hasError('required')">
+                                        Subject  Name is required
+                                    </div>
+                                </small> -->
+                            </div>
+
+                            <div class="field col-2">
+                                <input type="text" placeholder="5.00" aria-label="result" class="form-control" formControlName="result">
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="itemGroup.get('result')?.hasError('required')">
+                                        Result is required
+                                    </div> -->
+                                    <div *ngIf="itemGroup.get('result')?.hasError('pattern')">
+                                       Invalid Result
+                                    </div>
+                                </small>
+                            </div>
+
+                            <div class="field col-3">
+                                <input type="text" placeholder="2021 OR 2021-2022" aria-label="passingYear" class="form-control" formControlName="passingYear">
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="itemGroup.get('passingYear')?.hasError('required')">
+                                        Passing Year is required
+                                    </div> -->
+                                    <div *ngIf="itemGroup.get('passingYear')?.hasError('pattern')">
+                                        Invalid Passing Year
+                                     </div>
+                                </small>
+                            </div>
+
+                            
+
+                            <div class="field col-12 md:col-1">
+                                
+                                <button *ngIf="lst" (click)="addQualificationItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                <button *ngIf="!lst" (click)="removeAtQualification(i)"  type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                            </div>
+
+
+                        </div>
+                    </ng-container>
+                        </ng-container>
+                        <!-- End Items -->
+                       
+                    </div>
+                </div>
+        </p-tabPanel>
+        <p-tabPanel header="English Test">
+            <div class="card">
+                
+                <h5> Score </h5>
+                    <div class="col-12">
+                    <ng-container >
+                        <div class="grid formgrid">
+                                <div class="field col-2">
+                                    <label class="ml-2">Test Name </label>
+                                </div>
+                                <div class="field col-2">
+                                    <label class="ml-2">Overall Score </label>
+                                </div>
+                                <div class="field col-2">
+                                    <label class="ml-2">Listening </label>
+                                </div>
+                
+                                <div class="field col-1">
+                                    <label class="ml-2">Reading </label>
+                                </div>
+                                <div class="field col-1">
+                                    <label class="ml-1">Writing </label>
+                                </div>
+                
+                                <div class="field col-1">
+                                    <label class="ml-1">Speaking </label>
+                                </div>
+                                <div class="field col-2">
+                                    <label class="ml-2">Refused Any Country</label>
+                                </div>              
+                        </div>
+                    </ng-container>
+                    <!-- Start Items -->
+                <ng-container formArrayName="scores">
+                    <ng-container *ngFor="let item of scores.controls let i = index; let lst= last; let fst=first" [formGroupName]="i">
+                        <div class="grid formgrid" >
+                            
+                           
+                                <input type="hidden" aria-label="registrationId" class="form-control" formControlName="id">
+                                
+                                <input type="hidden" aria-label="registrationId" class="form-control" formControlName="registrationId">
+                                
+
+                            <div class="field col-2">
+                                <select placeholder="selectd" id="scoreName" formControlName="scoreName" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
+                                    <option selected>Select</option>
+                                    <option>IELTS</option>
+                                    <option>TOEFL</option>
+                                    <option>PTE</option>
+                                    <option>GRE</option>
+                                </select>
+                                <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                    <div *ngIf="item.get('scoreName')?.hasError('required')">
+                                    required
+                                    </div>
+                                    
+                                </small> -->
+                            </div>
+                            <div class="field col-2">
+                                <input type="text" aria-label="First name" class="form-control" formControlName="overallScore" >
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="item.get('overallScore')?.hasError('required')">
+                                       required
+                                    </div> -->
+                                    <div *ngIf="item.get('overallScore')?.hasError('pattern')">
+                                       Invalid
+                                    </div>
+                                </small>
+                            </div>
+
+                            <div class="field col-2">
+                                <input type="text" aria-label="listening" class="form-control" formControlName="listening">
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="item.get('listening')?.hasError('required')">
+                                       required
+                                    </div> -->
+                                    <div *ngIf="item.get('listening')?.hasError('pattern')">
+                                       Invalid
+                                    </div>
+                                </small>
+                            </div>
+
+                            <div class="field col-1">
+                                <input type="text" aria-label="reading" class="form-control" formControlName="reading">
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="item.get('reading')?.hasError('required')">
+                                       required
+                                    </div> -->
+                                    <div *ngIf="item.get('reading')?.hasError('pattern')">
+                                       Invalid
+                                    </div>
+                                </small>
+                            </div>
+                            <div class="field col-1">
+                                <input type="text" aria-label="writing" class="form-control" formControlName="writing">
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="item.get('writing')?.hasError('required')">
+                                       required
+                                    </div> -->
+                                    <div *ngIf="item.get('writing')?.hasError('pattern')">
+                                       Invalid
+                                    </div>
+                                </small>
+                            </div>
+                            <div class="field col-1">
+                                <input type="text" aria-label="speaking" class="form-control" formControlName="speaking">
+                                <small class="ng-dirty ng-invalid text-danger" >
+                                    <!-- <div *ngIf="item.get('speaking')?.hasError('required')">
+                                        required
+                                    </div> -->
+                                    <div *ngIf="item.get('speaking')?.hasError('pattern')">
+                                       Invalid 
+                                    </div>
+                                </small>
+                            </div>
+                            <div class="field col-2">
+                                <input type="text" aria-label="refusedCountry" class="form-control" formControlName="refusedCountry">
+                                <!-- <small class="ng-dirty ng-invalid text-danger" >
+                                    <div *ngIf="item.get('refusedCountry')?.hasError('required')">
+                                        required
+                                    </div>
+                                    
+                                </small> -->
+                            </div>
+
+                            
+
+                            <div class="field col-12 md:col-1">
+                                
+                                <button *ngIf="lst"  (click)="addEinglishItem()"  type="button" icon="pi pi-plus" class="btn btn-primary"> + </button>
+                                <button *ngIf="!lst" (click)="removeAtEinglishPurchase(i)"  type="button" icon="pi pi-trash" class="btn btn-danger mr-2"> - </button>
+                            </div>
+
+
+                        </div>
+                    </ng-container>
+                </ng-container>
+                    <!-- End Items -->
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+
+</div>
+   
+    <div class="content-section implementation" >
+        <p-button [disabled]="!productform.valid" label="Submit"  icon="pi pi-check" iconPos="right" class="mx-1" (click)="addOrUpdateRegistation()" ></p-button>
+        <p-button label="Cancel" icon="pi pi-check" iconPos="right" class="mx-1" [routerLink]="['/register/list']"></p-button>
+    </div>
+    
+   
+</div>
+
+</div>
+
+</div>
+</form>

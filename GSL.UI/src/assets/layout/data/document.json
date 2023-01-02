@@ -1,0 +1,169 @@
+{
+    "data":
+    [
+        {
+            "label": "Student Documents",
+            "children": [
+                    {
+                        "label": "CV",
+                        "data": "CV" 
+                    },
+                    {
+                        "label": "Academic Certificates & Transcripts (Notarize copy)",
+                        "data": "Academic Certificates & Transcripts (Notarize copy)" 
+                    },
+                    {
+                        "label": "Birth Certificate ",
+                        "data": "Birth Certificate " 
+                    },
+                    {
+                        "label": "Photo (PP Size 2 Copy)",
+                        "data": "Photo (PP Size 2 Copy)" 
+                    },
+                    {
+                        "label": "IELTS (Notarize copy)",
+                        "data": "IELTS (Notarize copy)" 
+                    },
+                    {
+                        "label": "Police Clearance Certificate",
+                        "data": "Police Clearance Certificate" 
+                    },
+                    {
+                        "label": "Medical Certificate",
+                        "data": "Medical Certificate" 
+                    },
+                    {
+                        "label": "Previous Visa Copy and Rejection History (If Any)",
+                        "data": "Previous Visa Copy and Rejection History (If Any)" 
+                    }
+                ]
+        },
+
+        {
+            "label": "Job Certificate",
+            "children": [
+                {
+                    "label": "Job Certificate",
+                    "data": "Job Certificate" 
+                },
+                {
+                    "label": "ID Card",
+                    "data": "ID Card" 
+                },
+
+                {
+                    "label": "Salary Statement/ Pay Slip ( Last 6 months )",
+                    "data": "Salary Statement/ Pay Slip ( Last 6 months )" 
+                },
+
+                {
+                    "label": "TIN Certificate",
+                    "data": "TIN Certificate" 
+                },
+
+                {
+                    "label": "Tax Return Certificate ( Last 3 Years)",
+                    "data": "Tax Return Certificate ( Last 3 Years)" 
+                },
+
+                {
+                    "label": "Visiting Card",
+                    "data": "Visiting Card" 
+                },
+
+                {
+                    "label": "Promotion Letter ( If Applicable)",
+                    "data": "Promotion Letter ( If Applicable)" 
+                },
+                {
+                    "label": "Photo ( PP Size 2 Copy )",
+                    "data": "Photo ( PP Size 2 Copy )" 
+                },
+                {
+                    "label": "NID/Passport Copy",
+                    "data": "NID/Passport Copy" 
+                },
+                {
+                    "label": "Appointment Letter",
+                    "data": "Appointment Letter" 
+                }
+                ]
+        },
+
+        {
+            "label": "Owner ship business",
+            "children": [
+                {
+                    "label": "NID/Passport",
+                    "data": "NID/Passport" 
+                },
+                {
+                    "label": "Photo (PP Size 2 Copy)",
+                    "data": "Photo (PP Size 2 Copy)" 
+                },
+                {
+                    "label": "Trade license",
+                    "data": "Trade license" 
+                },
+                {
+                    "label": "TIN certificate",
+                    "data": "TIN certificate" 
+                },
+                {
+                    "label": "Tax Return Certificate (Last 3 years)",
+                    "data": "Tax Return Certificate (Last 3 years)" 
+                },
+                {
+                    "label": "Visiting Card",
+                    "data": "Visiting Card" 
+                },
+                {
+                    "label": "Business Account (Solvency Certificate & Statement 3/6 Months)",
+                    "data": "Business Account (Solvency Certificate & Statement 3/6 Months)" 
+                },
+                {
+                    "label": "Personal current account (Solvency Certificate & Statement 3/6 Months)",
+                    "data": "Personal current account (Solvency Certificate & Statement 3/6 Months)" 
+                }
+
+                ]
+        },
+
+        {
+            "label": "Bank Statement & Solvency Certificate",
+            "children": [
+                {
+                    "label": "FDR/Savings Account (Solvency Certificate & Statement 3/6 Months)",
+                    "data": "FDR/Savings Account (Solvency Certificate & Statement 3/6 Months)" 
+                },
+                {
+                    "label": "Sanchaypatra / Post Office Savings Certificate",
+                    "data": "Sanchaypatra / Post Office Savings Certificate" 
+                }
+                ]
+        },
+
+
+        {
+            "label": "Regular income generate from house/shop rent",
+            "children": [
+                {
+                    "label": "All Land Deed photocopy",
+                    "data": "All Land Deed photocopy" 
+                },
+                {
+                    "label": "Rental Agreement (House/Shop/Market)",
+                    "data": "Rental Agreement (House/Shop/Market)" 
+                },
+                {
+                    "label": "House Plan Cop",
+                    "data": "House Plan Cop" 
+                }
+               
+                ]
+        }
+
+    
+        
+    ]
+}

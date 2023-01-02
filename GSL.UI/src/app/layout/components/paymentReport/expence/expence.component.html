@@ -1,0 +1,217 @@
+<div class="grid" [ngStyle]="{'display': displayOptionhead}">
+
+	<div class="col-12 md:col-6">
+		<div class="card p-fluid">
+			<h5>Payment Expense Details Report</h5>
+            <br>
+			<div class="field grid">
+				<label htmlFor="name3" class="col-12 mb-2 md:col-2 md:mb-0">From Date</label>
+				<div class="col-12 md:col-10">
+					<input pInputText id="name3" [(ngModel)]="FromDate" type="date" />
+				</div>
+			</div>
+			<div class="field grid">
+				<label htmlFor="email3" class="col-12 mb-2 md:col-2 md:mb-0">To Date</label>
+				<div class="col-12 md:col-10">
+					<input pInputText id="email3" [(ngModel)]="ToDate" type="date" />
+				</div>
+			</div>
+
+            <div class="field grid">
+                <label htmlFor="email3" class="col-12 mb-2 md:col-2 md:mb-0"></label>
+				<div class="col-4">
+					<button pButton label="Preview" (click)="paymentPdfButton(this.FromDate, this.ToDate)"></button>
+				</div>
+			</div>
+            
+		</div>
+        
+	</div>
+</div>
+
+<div>
+
+    <style>
+        .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  color: #5D6975;
+  text-decoration: underline;
+}
+
+body {
+  position: relative;
+  width: 565px; 
+  margin: 0 auto;  
+  color: #001028;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 12px; 
+  font-family: Arial;
+}
+
+header {
+  padding: 0, 0, 0, 0;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+h1 {
+  border-top: 1px solid  #5D6975;
+  border-bottom: 1px solid  #5D6975;
+  color: #5D6975;
+  font-size: 2.4em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center;
+}
+
+#project {
+  float: left;
+}
+
+#project span {
+  color: #5D6975;
+  text-align: right;
+  width: 52px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+#project div,
+#company div {
+  white-space: nowrap;        
+}
+
+table {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+table th,
+table td {
+  text-align: center;
+  border: 1px solid gray;
+}
+
+table th {
+  padding: 5px 20px;
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+  padding: 2px;
+  padding-left: 3px;
+  text-align: center;
+}
+
+table td.service,
+table td.desc {
+  vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1em;
+}
+
+.fromTO{
+    width: 60%;
+    padding: 5px;
+    padding-bottom:10px ;
+    font-size: 13px;
+    margin: 0 auto;
+}
+.padingP{
+    padding-right:70px;
+}
+.fromTO p{
+    display: inline;
+}
+
+
+
+
+    </style>
+  <body [ngStyle]="{'display': displayOption}">
+    <button pButton pRipple class="p-button-sm p-button-success mr-2" (click)="redirectPage()">Back</button>
+    <button pButton pRipple class="p-button-sm p-button-success mr-2" (click)="exportPDF()">Print</button>
+    <div  #contentJsPdf id="contentJsPdf" >
+      
+    <header class="clearfix">
+      <div id="logo">
+        <img src="assets/layout/images/Logo.png">
+      </div>
+      <h1>Payment Calculation</h1>
+      
+    </header>
+        <div class="fromTO">
+            <p class="padingP">Form Date: {{paymentPdf.fromDate | date:'dd-MM-yyyy'}}</p>
+            <p>To Date: {{paymentPdf.toDate | date:'dd-MM-yyyy'}}</p>
+        </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">Invoice</th>
+            <th class="service">Name</th>
+            <th class="service">Posting Date</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let item of paymentPdf.paymentPdfDetials">
+            <td class="service">{{item.invoice}}</td>
+            <td class="service">{{item.partyName}}</td>
+            <td class="service">{{item.postingDate | date:'dd-MM-yyyy'}}</td>
+            <td class="total">{{item.amount}}</td>
+          </tr>
+          
+          <tr>
+            <td colspan="3">TOTAL</td>
+            <td class="total">{{paymentPdf.total}}</td>
+          </tr>
+          
+      
+        </tbody>
+      </table>
+
+     
+
+    </div>
+    </body>
+
+</div>
